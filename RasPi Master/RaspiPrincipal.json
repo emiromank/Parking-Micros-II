@@ -1,0 +1,4652 @@
+[
+    {
+        "id": "2f41d27cb1b73455",
+        "type": "tab",
+        "label": "Flow Final",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "78df5a0d3eb915ce",
+        "type": "telegram command",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "command": "/start",
+        "description": "inicia sesion en el servicio",
+        "registercommand": true,
+        "language": "",
+        "scope": "default",
+        "bot": "344d8bf1b12f79e1",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 270,
+        "y": 140,
+        "wires": [
+            [
+                "c5e1a7361bd3bb90"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "c5e1a7361bd3bb90",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "bienvenida",
+        "func": "msg.payload={\n    \"chatId\": msg.payload.chatId,\n    \"type\":\"message\",\n    \"content\": \"Bienvenido al estaciona bot \" + msg.originalMessage.from.first_name+\" :)\\nPor favor utiliza /login junto con tu usuario y contrasena\\no si no te has registrado /register junto con tu username y contrasena\"\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 140,
+        "wires": [
+            [
+                "36245b8fa1b3fb7e"
+            ]
+        ]
+    },
+    {
+        "id": "36245b8fa1b3fb7e",
+        "type": "telegram sender",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "bot": "344d8bf1b12f79e1",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 620,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "10ec6327ec7a0743",
+        "type": "telegram command",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "command": "/login",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "344d8bf1b12f79e1",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 270,
+        "y": 240,
+        "wires": [
+            [
+                "f909de7a2e2b0156"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "f909de7a2e2b0156",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "verificarLogin",
+        "func": "global.set(\"chatId\", msg.payload.chatId);\nglobal.set(\"usrLogin\", msg.payload.content);\n\nmsg.payload = {\n    \"chatId\": msg.payload.chatId,\n    \"type\": \"message\",\n    \"content\": \"Ahora introduce tu contrasena:\"\n}\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 240,
+        "wires": [
+            [
+                "d39d95dea73eae2e"
+            ]
+        ]
+    },
+    {
+        "id": "fbde7e9dcd1abbd3",
+        "type": "telegram command",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "command": "/register",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "344d8bf1b12f79e1",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 200,
+        "y": 780,
+        "wires": [
+            [
+                "1b97d0d44eca900c"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "1b97d0d44eca900c",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "verificarUsuario",
+        "func": "global.set(\"chatId\", msg.payload.chatId);\nglobal.set(\"usrLogin\", msg.payload.content);\n\nmsg.payload = {\n    \"chatId\": msg.payload.chatId,\n    \"type\": \"message\",\n    \"content\": \"Ahora introduce tu contrasena:\"\n}\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 780,
+        "wires": [
+            [
+                "6d8f3c6bd35af311"
+            ]
+        ]
+    },
+    {
+        "id": "da9f5e391a010c19",
+        "type": "telegram reply",
+        "z": "2f41d27cb1b73455",
+        "name": "get reply",
+        "bot": "344d8bf1b12f79e1",
+        "x": 740,
+        "y": 780,
+        "wires": [
+            [
+                "1ab70ffd60c7c524"
+            ]
+        ]
+    },
+    {
+        "id": "6d8f3c6bd35af311",
+        "type": "telegram sender",
+        "z": "2f41d27cb1b73455",
+        "name": "send question",
+        "bot": "344d8bf1b12f79e1",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 560,
+        "y": 780,
+        "wires": [
+            [
+                "da9f5e391a010c19"
+            ]
+        ]
+    },
+    {
+        "id": "1ab70ffd60c7c524",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "crearUsuario",
+        "func": "global.set(\"contraCrUsuario\", msg.payload.content);\nglobal.set(\"msgid\", msg.payload.messageId);\n\nmsg.creado=1;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 910,
+        "y": 780,
+        "wires": [
+            [
+                "0765f6c3897a1bca"
+            ]
+        ]
+    },
+    {
+        "id": "a51dae9fc667cb47",
+        "type": "comment",
+        "z": "2f41d27cb1b73455",
+        "name": "mandar a crearlo a la base y si se pudo que mande un 1 o 0 si no",
+        "info": "",
+        "x": 850,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "b4a60221976fa60a",
+        "type": "switch",
+        "z": "2f41d27cb1b73455",
+        "name": "PONER ACA LA VARIABLE DE LA BASE",
+        "property": "creado",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 880,
+        "y": 500,
+        "wires": [
+            [
+                "1761115d51d014c6"
+            ]
+        ]
+    },
+    {
+        "id": "3c92e12bbf1bad58",
+        "type": "telegram sender",
+        "z": "2f41d27cb1b73455",
+        "name": "show inline keyboard",
+        "bot": "344d8bf1b12f79e1",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 1220,
+        "y": 540,
+        "wires": [
+            [
+                "199eedeba47ae27d"
+            ]
+        ]
+    },
+    {
+        "id": "1761115d51d014c6",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "initial inline keyboard message",
+        "func": "context.global.keyboard = { messageId: global.get(\"msgid\") };\n//context.global.keyboard = { messageId: msg.payload.messageId };\n\n\nvar opts = {\n  reply_to_message_id: msg.originalMessage.message_id,\n  reply_markup: JSON.stringify({\n    \"inline_keyboard\": [[\n      {\n        \"text\": \"Saldo\",\n        \"callback_data\": \"saldo\"\n      },\n      {\n        \"text\": \"Coches\",\n        \"callback_data\": \"placas\"\n      }],\n    [\n      {\n        \"text\": \"Tarifas\",\n        \"callback_data\": \"tarifas\"\n      }\n    ]\n    ]\n  })\n};\n\n//msg.payload = {};\n//msg.payload.content = \"Escoge una opción\";\n//msg.payload.type = \"reply_markup\";\n//msg.payload.options = opts;\n/*\nmsg.payload = {\n  \"chatId\": global.get(\"chatId\"),\n  \"type\": \"reply_markup\",\n  \"content\": \"Opcion:\",\n  \"options\": opts\n}\n*/\nmsg.payload = msg.telegram;\nmsg.payload.content = \"Escoge una opción\";\nmsg.payload.type = \"message\";\nmsg.payload.options = opts;\n\n\nreturn [ msg ];\n",
+        "outputs": "1",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1230,
+        "y": 480,
+        "wires": [
+            [
+                "3c92e12bbf1bad58"
+            ]
+        ]
+    },
+    {
+        "id": "73d56b039a9ee773",
+        "type": "telegram reply",
+        "z": "2f41d27cb1b73455",
+        "name": "get reply",
+        "bot": "344d8bf1b12f79e1",
+        "x": 800,
+        "y": 240,
+        "wires": [
+            [
+                "bc96e770882617c2"
+            ]
+        ]
+    },
+    {
+        "id": "d39d95dea73eae2e",
+        "type": "telegram sender",
+        "z": "2f41d27cb1b73455",
+        "name": "send question",
+        "bot": "344d8bf1b12f79e1",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 640,
+        "y": 240,
+        "wires": [
+            [
+                "73d56b039a9ee773"
+            ]
+        ]
+    },
+    {
+        "id": "bc96e770882617c2",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "crearUsuario",
+        "func": "global.set(\"contraLogin\", msg.payload.content);\nglobal.set(\"msgid\", msg._msgid);\n\nmsg.creado = 1;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 970,
+        "y": 240,
+        "wires": [
+            [
+                "4c3ea00973c50546"
+            ]
+        ]
+    },
+    {
+        "id": "c7fd2c53a3c69eb3",
+        "type": "comment",
+        "z": "2f41d27cb1b73455",
+        "name": "mandar a crearlo a la base y si se pudo que mande un 1 o 0 si no",
+        "info": "",
+        "x": 1090,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "0e2e8375b0f793f3",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "respuestaBase",
+        "func": "\n\nif (msg.creado == 1){\n    var content=\"Login exitoso\";\n}else{\n    var content = \"Error, vuelve a intentar con un usuario diferente.\";\n}\n\n\nmsg.payload = {\n    \"chatId\": global.get(\"chatId\"),\n    \"type\": \"message\",\n    \"content\": content\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1080,
+        "y": 340,
+        "wires": [
+            [
+                "95adf5daf69a00c6"
+            ]
+        ]
+    },
+    {
+        "id": "95adf5daf69a00c6",
+        "type": "telegram sender",
+        "z": "2f41d27cb1b73455",
+        "name": "send question",
+        "bot": "344d8bf1b12f79e1",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 1260,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0863b801db5db571",
+        "type": "complete",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "scope": [
+            "a1e0dd6ff8763420",
+            "dd5726627df66576"
+        ],
+        "uncaught": false,
+        "x": 1410,
+        "y": 380,
+        "wires": [
+            [
+                "1761115d51d014c6"
+            ]
+        ]
+    },
+    {
+        "id": "199eedeba47ae27d",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "getKeyboardIDs",
+        "func": "global.set('idKb', msg.payload.content.message_id);\nglobal.set('cidKb', msg.originalMessage.reply_to_message.chat.id)\nreturn [ msg ];",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1420,
+        "y": 620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "89d5c42bc09f9ee0",
+        "type": "mysql",
+        "z": "2f41d27cb1b73455",
+        "mydb": "5f3a4f40281f4ab0",
+        "name": "",
+        "x": 440,
+        "y": 400,
+        "wires": [
+            [
+                "484e3e72cb7ced75"
+            ]
+        ]
+    },
+    {
+        "id": "4c3ea00973c50546",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "Login",
+        "func": "msg.user = global.get(\"usrLogin\");\nmsg.pass = global.get(\"contraLogin\");\nmsg.topic=\"SELECT * FROM Users WHERE User='\"+msg.user+\"' AND Password='\"+msg.pass+\"'\";\nmsg.telegram = msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 400,
+        "wires": [
+            [
+                "89d5c42bc09f9ee0"
+            ]
+        ]
+    },
+    {
+        "id": "484e3e72cb7ced75",
+        "type": "switch",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "empty"
+            },
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 570,
+        "y": 400,
+        "wires": [
+            [
+                "ff63f0442fd53674"
+            ],
+            [
+                "63e84fd4ae39a6c7"
+            ]
+        ]
+    },
+    {
+        "id": "63e84fd4ae39a6c7",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "Menu",
+        "func": "msg.creado=1;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 420,
+        "wires": [
+            [
+                "0e2e8375b0f793f3",
+                "3e39402f7ac62384"
+            ]
+        ]
+    },
+    {
+        "id": "ff63f0442fd53674",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "LoginFallado",
+        "func": "msg.creado=0;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 340,
+        "wires": [
+            [
+                "0e2e8375b0f793f3"
+            ]
+        ]
+    },
+    {
+        "id": "297ee7dd5b6445b8",
+        "type": "mysql",
+        "z": "2f41d27cb1b73455",
+        "mydb": "5f3a4f40281f4ab0",
+        "name": "asd1",
+        "x": 430,
+        "y": 660,
+        "wires": [
+            [
+                "7a7a8db1d69f47b5"
+            ]
+        ]
+    },
+    {
+        "id": "0765f6c3897a1bca",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "Create User",
+        "func": "msg.user = global.get(\"usrLogin\");\nmsg.pass = global.get(\"contraCrUsuario\");\n\nmsg.topic=\"INSERT INTO Users(User, Password) VALUES('\"+msg.user+\"','\"+msg.pass+\"');\";\nmsg.telegram = msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 660,
+        "wires": [
+            [
+                "297ee7dd5b6445b8"
+            ]
+        ]
+    },
+    {
+        "id": "cd1761097bf5938e",
+        "type": "catch",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "scope": [
+            "297ee7dd5b6445b8"
+        ],
+        "uncaught": false,
+        "x": 430,
+        "y": 600,
+        "wires": [
+            [
+                "bea181ed2c171787"
+            ]
+        ]
+    },
+    {
+        "id": "bea181ed2c171787",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "ErrorUser",
+        "func": "msg.creado=0;\nmsg.topic = \"Ese usuario ya existe, intente con otro usuario.\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 600,
+        "wires": [
+            [
+                "b4a60221976fa60a",
+                "5ed82c306b6fe806"
+            ]
+        ]
+    },
+    {
+        "id": "7a7a8db1d69f47b5",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "CorrectUser",
+        "func": "msg.creado=1;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 660,
+        "wires": [
+            [
+                "b4a60221976fa60a",
+                "5ed82c306b6fe806"
+            ]
+        ]
+    },
+    {
+        "id": "5ed82c306b6fe806",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "respuestaBase",
+        "func": "\n\nif (msg.creado == 1){\n    var content=\"Usuario creado con éxito\";\n}else{\n    var content = \"Error, vuelve a intentar con un usuario diferente.\";\n}\n\n\nmsg.payload = {\n    \"chatId\": global.get(\"chatId\"),\n    \"type\": \"message\",\n    \"content\": content\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 900,
+        "y": 660,
+        "wires": [
+            [
+                "d77d87695d4101a6"
+            ]
+        ]
+    },
+    {
+        "id": "d77d87695d4101a6",
+        "type": "telegram sender",
+        "z": "2f41d27cb1b73455",
+        "name": "send question",
+        "bot": "344d8bf1b12f79e1",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 1080,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3e39402f7ac62384",
+        "type": "change",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 890,
+        "y": 420,
+        "wires": [
+            [
+                "b4a60221976fa60a"
+            ]
+        ]
+    },
+    {
+        "id": "8e3c04ecd7e08b77",
+        "type": "mqtt in",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "topic": "esp32/boton",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "cd936c2a93c18300",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1050,
+        "y": 3500,
+        "wires": [
+            [
+                "a78a9ed60e16d19b"
+            ]
+        ]
+    },
+    {
+        "id": "a78a9ed60e16d19b",
+        "type": "debug",
+        "z": "2f41d27cb1b73455",
+        "name": "debug 47",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1240,
+        "y": 3440,
+        "wires": []
+    },
+    {
+        "id": "a6d750f0348d0adc",
+        "type": "inject",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 230,
+        "y": 1620,
+        "wires": [
+            [
+                "d5850bdce62fe01b"
+            ]
+        ]
+    },
+    {
+        "id": "d5850bdce62fe01b",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "function 5",
+        "func": "global.set(\"led\", 0);\n\nglobal.set(\"servo1\", \"cierra\");",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 1620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8f1e4bca6e7d7638",
+        "type": "telegram event",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "bot": "344d8bf1b12f79e1",
+        "event": "callback_query",
+        "autoanswer": true,
+        "x": 180,
+        "y": 1000,
+        "wires": [
+            [
+                "0adb463747117d5a"
+            ]
+        ]
+    },
+    {
+        "id": "17b6fa63bded4377",
+        "type": "telegram sender",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "bot": "344d8bf1b12f79e1",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 790,
+        "y": 920,
+        "wires": [
+            [
+                "e1c556ac32096128"
+            ]
+        ]
+    },
+    {
+        "id": "917d9a523b2ea398",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "saldo",
+        "func": "var reply_markup = JSON.stringify({\n    \"inline_keyboard\": [[\n        {\n            \"text\": \"Checar\",\n            \"callback_data\": \"checarS\"\n        },\n        {\n            \"text\": \"Recargar\",\n            \"callback_data\": \"recargarS\"\n        }]\n    ]\n});\n\n\nvar options = {\n    chat_id: global.get('cidKb'),\n    reply_markup: reply_markup,\n    message_id: global.get('idKb')\n};\n\nmsg.payload.type = 'editMessageReplyMarkup';\nmsg.payload.content = reply_markup;\nmsg.payload.options = options;\n\nreturn [msg];\n/*\n// This is a sample of how to send a second inline keyboard with modified buttons\nvar reply_markup = JSON.stringify({\n    \"inline_keyboard\": [[\n        {\n            \"text\": \"On\",\n            \"callback_data\": \"Turn on\"\n        },\n        {\n            \"text\": \"Off\",\n            \"callback_data\": \"Turn off\"\n        }]\n    ]\n});\n\n\nvar options = {\n    chat_id: global.get(\"cidKb\"),\n    reply_markup: reply_markup,\n    messageId: global.get(\"idKb\")\n};\n\nmsg.payload.type = 'editMessageReplyMarkup';\nmsg.payload.content = reply_markup;\nmsg.payload.options = options;\n\nreturn [msg];\n/*\nvar opts = {\n    reply_to_message_id: msg.payload.messageId,\n    reply_markup: JSON.stringify({\n        \"inline_keyboard\": [\n            {\n                \"text\": \"Checar balance\",\n                \"callback_data\": \"checarS\"\n            },\n            {\n                \"text\": \"aumentar balance\",\n                \"callback_data\": \"recargaS\"\n            }],\n\n        \n    })\n};\n\n\n\nmsg.payload.content = \"Saldo: \";\nmsg.payload.options = opts;\n\n*/\n\n\nreturn [msg];",
+        "outputs": "1",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 920,
+        "wires": [
+            [
+                "17b6fa63bded4377"
+            ]
+        ]
+    },
+    {
+        "id": "0adb463747117d5a",
+        "type": "switch",
+        "z": "2f41d27cb1b73455",
+        "name": "check callback data",
+        "property": "payload.content",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "saldo",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "checarS",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "recargarS",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "tarifas",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 390,
+        "y": 1000,
+        "wires": [
+            [
+                "917d9a523b2ea398"
+            ],
+            [
+                "1f607a99b0340c91"
+            ],
+            [
+                "7ece0adf76ed14a3"
+            ],
+            [
+                "66c7acaf321c3bfb"
+            ]
+        ]
+    },
+    {
+        "id": "1f607a99b0340c91",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "balance",
+        "func": "var user = global.get(\"usrLogin\");\n\nmsg.topic = \"Select Saldo From Users where User='\" + user + \"';\";\nmsg.telegram = msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 1020,
+        "wires": [
+            [
+                "3c14e6fade3b972f"
+            ]
+        ]
+    },
+    {
+        "id": "a1e0dd6ff8763420",
+        "type": "telegram sender",
+        "z": "2f41d27cb1b73455",
+        "name": "MandaSaldo",
+        "bot": "344d8bf1b12f79e1",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 1070,
+        "y": 1020,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "07ccbffb1e6673ff",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "mandarBalance",
+        "func": "var saldo = msg.payload[0].Saldo;\n\n\nmsg.payload = msg.telegram;\nmsg.payload = {\n    \"chatId\": global.get('cidKb'),\n    \"type\": \"message\",\n    \"content\": \"Tu saldo es de: $\" + saldo //+ msg.payload\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 1020,
+        "wires": [
+            [
+                "a1e0dd6ff8763420"
+            ]
+        ]
+    },
+    {
+        "id": "e1c556ac32096128",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "getKeyboardIDs",
+        "func": "global.set('idKb', msg.payload.content.message_id);\nglobal.set('cidKb', msg.originalMessage.reply_to_message.chat.id)\nreturn [ msg ];",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1000,
+        "y": 920,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7ece0adf76ed14a3",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "recargar",
+        "func": "\nmsg.payload = {\n    \"chatId\": global.get('cidKb'),\n    \"type\": \"message\",\n    \"content\": \"Responde con la cantidad que desees recargar\"\n}\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 1100,
+        "wires": [
+            [
+                "f91bcf6e9fee1e8a"
+            ]
+        ]
+    },
+    {
+        "id": "a87398d3d5359c76",
+        "type": "telegram reply",
+        "z": "2f41d27cb1b73455",
+        "name": "get reply",
+        "bot": "344d8bf1b12f79e1",
+        "x": 1000,
+        "y": 1100,
+        "wires": [
+            [
+                "aa982ad959ac4b46"
+            ]
+        ]
+    },
+    {
+        "id": "f91bcf6e9fee1e8a",
+        "type": "telegram sender",
+        "z": "2f41d27cb1b73455",
+        "name": "send question",
+        "bot": "344d8bf1b12f79e1",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 820,
+        "y": 1100,
+        "wires": [
+            [
+                "a87398d3d5359c76"
+            ]
+        ]
+    },
+    {
+        "id": "aa982ad959ac4b46",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "consulta saldo",
+        "func": "global.set(\"recarga\", parseInt(msg.payload.content));\nvar user = global.get('usrLogin');\n\n//hacer select de saldo \nmsg.topic = \"Select Saldo From Users where User='\" + user + \"';\";\nmsg.telegram=msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1160,
+        "y": 1100,
+        "wires": [
+            [
+                "9211b16512a458ef"
+            ]
+        ]
+    },
+    {
+        "id": "10ee095de3e4bb89",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "nuevoSaldo",
+        "func": "var saldoOg = msg.payload[0].Saldo;\nvar recarga = global.get('recarga');\nvar user = global.get(\"usrLogin\")\nvar nuevoSaldo=saldoOg+recarga;\n\nmsg.topic = \"Update Users set Saldo='\" + nuevoSaldo + \"' WHERE User='\" + user + \"'\";\n\n\n\nvar content = \"Tu nuevo saldo es $\"+nuevoSaldo;\nglobal.set('saddddd',nuevoSaldo);\n\n\nmsg.payload=msg.telegram;\nmsg.payload = {\n    \"chatId\": global.get(\"cidKb\"),\n    \"type\": \"message\",\n    \"content\": content\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1450,
+        "y": 1100,
+        "wires": [
+            [
+                "a1e0dd6ff8763420",
+                "cb1260b26a617b49"
+            ]
+        ]
+    },
+    {
+        "id": "66c7acaf321c3bfb",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "tarifas",
+        "func": "var user = global.get(\"usrLogin\");\n\n//hacer el select saldo de la base\n//select * from tarifas\n\nmsg.telegram=msg.payload;\nmsg.payload = 'bblallaa la tarifa es';\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 1160,
+        "wires": [
+            [
+                "1a61f836546ac80c"
+            ]
+        ]
+    },
+    {
+        "id": "1a61f836546ac80c",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "mandarBalance",
+        "func": "var content = 'La tarifa del estacionamiento en Artz es:\\nMinutos     Precio\\n15                   $0\\n120                 $30\\n150                 $40\\n180                 $50\\n9999999       $100'\nmsg.payload=msg.telegram;\nmsg.payload = {\n    \"chatId\": global.get('cidKb'),\n    \"type\": \"message\",\n    \"content\": content\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 900,
+        "y": 1160,
+        "wires": [
+            [
+                "a1e0dd6ff8763420"
+            ]
+        ]
+    },
+    {
+        "id": "cb1260b26a617b49",
+        "type": "mysql",
+        "z": "2f41d27cb1b73455",
+        "mydb": "5f3a4f40281f4ab0",
+        "name": "asd1",
+        "x": 1610,
+        "y": 1140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9211b16512a458ef",
+        "type": "mysql",
+        "z": "2f41d27cb1b73455",
+        "mydb": "5f3a4f40281f4ab0",
+        "name": "asd1",
+        "x": 1310,
+        "y": 1100,
+        "wires": [
+            [
+                "10ee095de3e4bb89"
+            ]
+        ]
+    },
+    {
+        "id": "3c14e6fade3b972f",
+        "type": "mysql",
+        "z": "2f41d27cb1b73455",
+        "mydb": "5f3a4f40281f4ab0",
+        "name": "asd1",
+        "x": 730,
+        "y": 1020,
+        "wires": [
+            [
+                "07ccbffb1e6673ff"
+            ]
+        ]
+    },
+    {
+        "id": "d242272cfbb5f40e",
+        "type": "telegram event",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "bot": "344d8bf1b12f79e1",
+        "event": "callback_query",
+        "autoanswer": true,
+        "x": 200,
+        "y": 1380,
+        "wires": [
+            [
+                "fccfebd83b01677d"
+            ]
+        ]
+    },
+    {
+        "id": "c4307c210b545a66",
+        "type": "telegram sender",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "bot": "344d8bf1b12f79e1",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 810,
+        "y": 1300,
+        "wires": [
+            [
+                "da3c473efd009f0c"
+            ]
+        ]
+    },
+    {
+        "id": "c58de17793f2028f",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "placas",
+        "func": "var reply_markup = JSON.stringify({\n    \"inline_keyboard\": [[\n        {\n            \"text\": \"Mis placas\",\n            \"callback_data\": \"consultarPlac\"\n        },\n        {\n            \"text\": \"Mis movimientos\",\n            \"callback_data\": \"consultarMov\"\n        }],\n    [\n        {\n            \"text\": \"Nueva placa\",\n            \"callback_data\": \"newPlac\"\n        }\n    ]\n    ]\n});\n\nvar options = {\n    chat_id: global.get('cidKb'),\n    reply_markup: reply_markup,\n    message_id: global.get('idKb')\n};\n\nmsg.payload.type = 'editMessageReplyMarkup';\nmsg.payload.content = reply_markup;\nmsg.payload.options = options;\n\nreturn [msg];\n",
+        "outputs": "1",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 1300,
+        "wires": [
+            [
+                "c4307c210b545a66"
+            ]
+        ]
+    },
+    {
+        "id": "fccfebd83b01677d",
+        "type": "switch",
+        "z": "2f41d27cb1b73455",
+        "name": "check callback data",
+        "property": "payload.content",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "placas",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "consultarPlac",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "consultarMov",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "newPlac",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 410,
+        "y": 1380,
+        "wires": [
+            [
+                "c58de17793f2028f"
+            ],
+            [
+                "8f793a0d3bf987cd"
+            ],
+            [
+                "919fbdd48cdce54d"
+            ],
+            [
+                "38c155b0288e5458"
+            ]
+        ]
+    },
+    {
+        "id": "8f793a0d3bf987cd",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "qryPlaca",
+        "func": "var user = global.get(\"usrLogin\");\n\nmsg.topic = \"SELECT Placas FROM Placas WHERE User='\"+user+\"';\";\nmsg.telegram = msg.payload;\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 1360,
+        "wires": [
+            [
+                "fb4879a2f835b0de"
+            ]
+        ]
+    },
+    {
+        "id": "da3c473efd009f0c",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "getKeyboardIDs",
+        "func": "global.set('idKb', msg.payload.content.message_id);\nglobal.set('cidKb', msg.originalMessage.reply_to_message.chat.id)\nreturn [ msg ];",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1020,
+        "y": 1300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fadb65e3dfef6fbc",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "movimientos",
+        "func": "\nmsg.payload = {\n    \"chatId\": global.get('cidKb'),\n    \"type\": \"message\",\n    \"content\": \"Responde con la placa que quieras consultar\"\n}\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 1440,
+        "wires": [
+            [
+                "1a33ae029b109990"
+            ]
+        ]
+    },
+    {
+        "id": "1c87a7782549afb0",
+        "type": "telegram reply",
+        "z": "2f41d27cb1b73455",
+        "name": "get reply",
+        "bot": "344d8bf1b12f79e1",
+        "x": 1100,
+        "y": 1440,
+        "wires": [
+            [
+                "d0eb28e796bdef84"
+            ]
+        ]
+    },
+    {
+        "id": "1a33ae029b109990",
+        "type": "telegram sender",
+        "z": "2f41d27cb1b73455",
+        "name": "send question",
+        "bot": "344d8bf1b12f79e1",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 920,
+        "y": 1440,
+        "wires": [
+            [
+                "1c87a7782549afb0"
+            ]
+        ]
+    },
+    {
+        "id": "d0eb28e796bdef84",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "consulta Entrada Salida",
+        "func": "global.set(\"placaCons\", msg.payload.content.toLowerCase());\nvar placa = global.get('placaCons');\n\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1290,
+        "y": 1440,
+        "wires": [
+            [
+                "fef372d2296542a7"
+            ]
+        ]
+    },
+    {
+        "id": "fef372d2296542a7",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "mandarMovimientos",
+        "func": "var content = \"Tu ultima entrada fue en:\\n\" + msg.payload + \"\\nTu ultima salida fue en:\\n\" + \"blablal\";\n\nmsg.payload = {\n    \"chatId\": global.get('cidKb'),\n    \"type\": \"message\",\n    \"content\": content\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1540,
+        "y": 1440,
+        "wires": [
+            [
+                "dd5726627df66576"
+            ]
+        ]
+    },
+    {
+        "id": "dd5726627df66576",
+        "type": "telegram sender",
+        "z": "2f41d27cb1b73455",
+        "name": "MandaRespuesta",
+        "bot": "344d8bf1b12f79e1",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 1750,
+        "y": 1420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8997739567f95e98",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "responderPlacas",
+        "func": "var content=\"\";\nif (msg.payload.length==0){\n    content = \"No tienes ninguna placa registrada en nuestro sistema\"\n}else if(msg.payload.length!=0){\n    content = \"Tus placas son: \\n\"\n    for (var i=0; i<msg.payload.length;i++){\n        content = content + msg.payload[i].Placas+\"\\n\";\n    }\n}\nmsg.payload = msg.telegram;\n\nmsg.payload = {\n    \"chatId\": global.get('cidKb'),\n    \"type\": \"message\",\n    \"content\": content\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 950,
+        "y": 1360,
+        "wires": [
+            [
+                "dd5726627df66576"
+            ]
+        ]
+    },
+    {
+        "id": "38c155b0288e5458",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "pedirPlaca",
+        "func": "\nmsg.payload = {\n    \"chatId\": global.get('cidKb'),\n    \"type\": \"message\",\n    \"content\": \"Introduce tu nueva placa: \"\n}\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 1560,
+        "wires": [
+            [
+                "628c6d12dd335797"
+            ]
+        ]
+    },
+    {
+        "id": "e9a307efb2beb9a1",
+        "type": "telegram reply",
+        "z": "2f41d27cb1b73455",
+        "name": "get reply",
+        "bot": "344d8bf1b12f79e1",
+        "x": 1040,
+        "y": 1560,
+        "wires": [
+            [
+                "e0414b6ecbf066af"
+            ]
+        ]
+    },
+    {
+        "id": "628c6d12dd335797",
+        "type": "telegram sender",
+        "z": "2f41d27cb1b73455",
+        "name": "send question",
+        "bot": "344d8bf1b12f79e1",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 860,
+        "y": 1560,
+        "wires": [
+            [
+                "e9a307efb2beb9a1"
+            ]
+        ]
+    },
+    {
+        "id": "e0414b6ecbf066af",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "mandarPlaca",
+        "func": "global.set(\"nuevaPlac\", msg.payload.content);\n\nvar usr = global.get('usrLogin');\nvar placa = global.get('nuevaPlac');\n\n\nplaca=placa.toLowerCase();\nmsg.creado = 0; \n\nif (placa.includes(\"-\")==true&&placa.length<12){\n    msg.topic = \"INSERT INTO Placas(User, Placas) VALUES('\" + usr + \"','\" + placa + \"');\";\n    msg.creado = 1; \n}else{\n    msg.topic = \"SHOW TABLES;\"\n}\nmsg.telegram = msg.payload;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1210,
+        "y": 1560,
+        "wires": [
+            [
+                "d1b12e72b605bedb"
+            ]
+        ]
+    },
+    {
+        "id": "3670cab615132025",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "respuestaBase",
+        "func": "\nif (msg.creado == 1){\n    var content=\"Placa anadida con éxito\";\n}else{\n    var content = \"Error, vuelve a intentar\";\n}\nmsg.payload=msg.telegram;\nmsg.payload = {\n    \"chatId\": global.get('cidKb'),\n    \"type\": \"message\",\n    \"content\": content\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1500,
+        "y": 1560,
+        "wires": [
+            [
+                "dd5726627df66576"
+            ]
+        ]
+    },
+    {
+        "id": "d1b12e72b605bedb",
+        "type": "mysql",
+        "z": "2f41d27cb1b73455",
+        "mydb": "5f3a4f40281f4ab0",
+        "name": "checa",
+        "x": 1350,
+        "y": 1560,
+        "wires": [
+            [
+                "3670cab615132025"
+            ]
+        ]
+    },
+    {
+        "id": "fb4879a2f835b0de",
+        "type": "mysql",
+        "z": "2f41d27cb1b73455",
+        "mydb": "5f3a4f40281f4ab0",
+        "name": "asd1",
+        "x": 770,
+        "y": 1360,
+        "wires": [
+            [
+                "8997739567f95e98"
+            ]
+        ]
+    },
+    {
+        "id": "7cba80a0a9bf349f",
+        "type": "comment",
+        "z": "2f41d27cb1b73455",
+        "name": "pregunta a la base la ultima entrada y salida y se guarda global",
+        "info": "",
+        "x": 1390,
+        "y": 1480,
+        "wires": []
+    },
+    {
+        "id": "786a9deaff5c0cfb",
+        "type": "catch",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "scope": [
+            "d1b12e72b605bedb"
+        ],
+        "uncaught": false,
+        "x": 1210,
+        "y": 1620,
+        "wires": [
+            [
+                "d7cb2ac1528e0585"
+            ]
+        ]
+    },
+    {
+        "id": "d7cb2ac1528e0585",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "function 7",
+        "func": "msg.creado=0;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1340,
+        "y": 1620,
+        "wires": [
+            [
+                "3670cab615132025"
+            ]
+        ]
+    },
+    {
+        "id": "dbf862deda55b532",
+        "type": "telegram command",
+        "z": "2f41d27cb1b73455",
+        "name": "/start",
+        "command": "/start",
+        "description": "inicia sesion en el servicio",
+        "registercommand": true,
+        "language": "",
+        "scope": "default",
+        "bot": "8880288620190407",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 285,
+        "y": 2300,
+        "wires": [
+            [
+                "6d86d3e6e03d6561"
+            ],
+            []
+        ],
+        "l": false
+    },
+    {
+        "id": "6d86d3e6e03d6561",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "bienvenida",
+        "func": "msg.payload={\n    \"chatId\": msg.payload.chatId,\n    \"type\":\"message\",\n    \"content\": \"Bienvenido administrador al estaciona bot \" + msg.originalMessage.from.first_name+\" :)\\nPor favor utiliza /login junto con tu usuario y contrasena\\nPara registrarte contacta al equipo\"\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 2300,
+        "wires": [
+            [
+                "d2d4cba943cd309d"
+            ]
+        ]
+    },
+    {
+        "id": "d2d4cba943cd309d",
+        "type": "telegram sender",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "bot": "8880288620190407",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 640,
+        "y": 2300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "773f623cb95f9304",
+        "type": "telegram command",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "command": "/login",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "8880288620190407",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 250,
+        "y": 2400,
+        "wires": [
+            [
+                "bbe9915f5d9ae18c"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "bbe9915f5d9ae18c",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "verificarLogin",
+        "func": "global.set(\"AchatId\", msg.payload.chatId);\nglobal.set(\"AusrLogin\", msg.payload.content);\n\n\n\nmsg.payload = {\n    \"chatId\": msg.payload.chatId,\n    \"type\": \"message\",\n    \"content\": \"Ahora introduce tu contrasena:\"\n}\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 2400,
+        "wires": [
+            [
+                "e9cdc83aeb9102b3"
+            ]
+        ]
+    },
+    {
+        "id": "c5b83cf6a89c2ccc",
+        "type": "comment",
+        "z": "2f41d27cb1b73455",
+        "name": "mandar a crearlo a la base y si se pudo que mande un 1 o 0 si no",
+        "info": "",
+        "x": 1050,
+        "y": 2340,
+        "wires": []
+    },
+    {
+        "id": "1fdb68b19d24a2f1",
+        "type": "telegram reply",
+        "z": "2f41d27cb1b73455",
+        "name": "get reply",
+        "bot": "8880288620190407",
+        "x": 780,
+        "y": 2400,
+        "wires": [
+            [
+                "50d80c8eaff67f76"
+            ]
+        ]
+    },
+    {
+        "id": "e9cdc83aeb9102b3",
+        "type": "telegram sender",
+        "z": "2f41d27cb1b73455",
+        "name": "send question",
+        "bot": "8880288620190407",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 620,
+        "y": 2400,
+        "wires": [
+            [
+                "1fdb68b19d24a2f1"
+            ]
+        ]
+    },
+    {
+        "id": "50d80c8eaff67f76",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "crearUsuario",
+        "func": "global.set(\"AcontraLogin\", msg.payload.content);\nglobal.set(\"Amsgid\", msg._msgid);\n\nmsg.user = global.get(\"AusrLogin\");\nmsg.pass = global.get(\"AcontraLogin\");\n\nmsg.creado = 1;\n\nmsg.topic = \"SELECT * FROM Users WHERE User='\" + msg.user + \"' AND Password='\" + msg.pass + \"'\";\nmsg.telegram = msg.payload;\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 950,
+        "y": 2400,
+        "wires": [
+            [
+                "5b0620b392361812"
+            ]
+        ]
+    },
+    {
+        "id": "f6af75c46d3d94eb",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "respuestaBase",
+        "func": "\n\nif (msg.creado == 1){\n    var content=\"Login exitoso\";\n}else{\n    var content = \"Error, vuelve a intentar con un usuario diferente.\";\n}\n\n\nmsg.payload = {\n    \"chatId\": global.get(\"AchatId\"),\n    \"type\": \"message\",\n    \"content\": content\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1320,
+        "y": 2400,
+        "wires": [
+            [
+                "6a36ed539a8f5feb"
+            ]
+        ]
+    },
+    {
+        "id": "6a36ed539a8f5feb",
+        "type": "telegram sender",
+        "z": "2f41d27cb1b73455",
+        "name": "send question",
+        "bot": "8880288620190407",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 1500,
+        "y": 2400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5b0620b392361812",
+        "type": "mysql",
+        "z": "2f41d27cb1b73455",
+        "mydb": "5f3a4f40281f4ab0",
+        "name": "",
+        "x": 900,
+        "y": 2580,
+        "wires": [
+            [
+                "380c665d19f9f4d0"
+            ]
+        ]
+    },
+    {
+        "id": "380c665d19f9f4d0",
+        "type": "switch",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "empty"
+            },
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1030,
+        "y": 2580,
+        "wires": [
+            [
+                "b1c969ced4beb34f"
+            ],
+            [
+                "97778ff84f258e88"
+            ]
+        ]
+    },
+    {
+        "id": "97778ff84f258e88",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "Menu",
+        "func": "msg.creado=1;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1150,
+        "y": 2600,
+        "wires": [
+            [
+                "e94816ea4f32e46c",
+                "f6af75c46d3d94eb"
+            ]
+        ]
+    },
+    {
+        "id": "b1c969ced4beb34f",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "LoginFallado",
+        "func": "msg.creado=0;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1170,
+        "y": 2520,
+        "wires": [
+            [
+                "f6af75c46d3d94eb"
+            ]
+        ]
+    },
+    {
+        "id": "e94816ea4f32e46c",
+        "type": "change",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1350,
+        "y": 2600,
+        "wires": [
+            [
+                "5a237634de15452a"
+            ]
+        ]
+    },
+    {
+        "id": "5a237634de15452a",
+        "type": "switch",
+        "z": "2f41d27cb1b73455",
+        "name": "PONER ACA LA VARIABLE DE LA BASE",
+        "property": "creado",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1460,
+        "y": 2720,
+        "wires": [
+            [
+                "731ecd54e29393a3"
+            ]
+        ]
+    },
+    {
+        "id": "18fa67aa2dc56009",
+        "type": "telegram sender",
+        "z": "2f41d27cb1b73455",
+        "name": "show inline keyboard",
+        "bot": "8880288620190407",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 1520,
+        "y": 2820,
+        "wires": [
+            [
+                "e660ae6d39b0b49f"
+            ]
+        ]
+    },
+    {
+        "id": "731ecd54e29393a3",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "initial inline keyboard message",
+        "func": "\n\nvar opts = {\n  reply_to_message_id: msg.originalMessage.message_id,\n  reply_markup: JSON.stringify({\n    \"inline_keyboard\": [[\n      {\n        \"text\": \"Entradas y Salidas\",\n        \"callback_data\": \"es\"\n      },\n      {\n        \"text\": \"Ganancias\",\n        \"callback_data\": \"ganancias\"\n      }],\n    [\n      {\n        \"text\": \"Placas\",\n        \"callback_data\": \"placas\"\n      }\n    ]\n    ]\n  })\n};\n\nmsg.payload = msg.telegram;\nmsg.payload.content = \"Escoge una opción\";\nmsg.payload.type = \"message\";\nmsg.payload.options = opts;\n\n\n\nreturn [ msg ];\n",
+        "outputs": "1",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1530,
+        "y": 2760,
+        "wires": [
+            [
+                "18fa67aa2dc56009"
+            ]
+        ]
+    },
+    {
+        "id": "bb3bbfa8645ee01b",
+        "type": "complete",
+        "z": "2f41d27cb1b73455",
+        "name": "reiniciarTeclado",
+        "scope": [
+            "e23ef0fd84822a9f"
+        ],
+        "uncaught": false,
+        "x": 1560,
+        "y": 2680,
+        "wires": [
+            [
+                "731ecd54e29393a3"
+            ]
+        ]
+    },
+    {
+        "id": "e660ae6d39b0b49f",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "getKeyboardIDs",
+        "func": "global.set('AidKb', msg.payload.content.message_id);\nglobal.set('AcidKb', msg.originalMessage.reply_to_message.chat.id)\nreturn [ msg ];",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1720,
+        "y": 2900,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ba7cddc12927be7f",
+        "type": "telegram event",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "bot": "8880288620190407",
+        "event": "callback_query",
+        "autoanswer": true,
+        "x": 220,
+        "y": 3020,
+        "wires": [
+            [
+                "29bd1360547f5e31"
+            ]
+        ]
+    },
+    {
+        "id": "29bd1360547f5e31",
+        "type": "switch",
+        "z": "2f41d27cb1b73455",
+        "name": "check callback data",
+        "property": "payload.content",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "es",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ee",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ss",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ocupacion",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 430,
+        "y": 3020,
+        "wires": [
+            [
+                "365d0fe00a69eef7"
+            ],
+            [
+                "8a755dc8f611817b"
+            ],
+            [
+                "74b24decc9fc49d9"
+            ],
+            [
+                "006adc679f3c16b5"
+            ]
+        ]
+    },
+    {
+        "id": "8a755dc8f611817b",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "pedirFecha",
+        "func": "\nmsg.payload = {\n    \"chatId\": global.get('AcidKb'),\n    \"type\": \"message\",\n    \"content\": \"Introduce la fecha que quieras consultar:\\nSigue el formato DD/MM/AAAA \"\n}\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 3000,
+        "wires": [
+            [
+                "13531d0847ab09a5"
+            ]
+        ]
+    },
+    {
+        "id": "498d3bd0eb2e5d12",
+        "type": "telegram reply",
+        "z": "2f41d27cb1b73455",
+        "name": "get reply",
+        "bot": "8880288620190407",
+        "x": 1040,
+        "y": 3000,
+        "wires": [
+            [
+                "3595f6f3c1dd3363"
+            ]
+        ]
+    },
+    {
+        "id": "13531d0847ab09a5",
+        "type": "telegram sender",
+        "z": "2f41d27cb1b73455",
+        "name": "send question",
+        "bot": "8880288620190407",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 860,
+        "y": 3000,
+        "wires": [
+            [
+                "498d3bd0eb2e5d12"
+            ]
+        ]
+    },
+    {
+        "id": "3595f6f3c1dd3363",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "mandarFecha",
+        "func": "global.set(\"fechaConsulta\", msg.payload.content);\n\nvar fecha = global.get('fechaConsulta');\n\n//hacer select donde devuelva el total de entradas\n//WHERE fecha = var fecha\n//deberia de devolver un numero\nmsg.payload=70;\nmsg.exito=1;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1220,
+        "y": 3000,
+        "wires": [
+            [
+                "d9843d5e8afbd949"
+            ]
+        ]
+    },
+    {
+        "id": "d9843d5e8afbd949",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "respuestaEntradas",
+        "func": "\n\nif (msg.exito == 1){\n    var content=\"El total de entradas el dia \"+global.get('fechaConsulta')+\" fue de \"+msg.payload;\n}else{\n    var content = \"Error, vuelve a intentar\";\n}\n\nmsg.payload = {\n    \"chatId\": global.get('AcidKb'),\n    \"type\": \"message\",\n    \"content\": content\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1410,
+        "y": 3000,
+        "wires": [
+            [
+                "e23ef0fd84822a9f"
+            ]
+        ]
+    },
+    {
+        "id": "74b24decc9fc49d9",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "pedirFecha",
+        "func": "\nmsg.payload = {\n    \"chatId\": global.get('AcidKb'),\n    \"type\": \"message\",\n    \"content\": \"Introduce la fecha que quieras consultar:\\nSigue el formato DD/MM/AAAA \"\n}\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 3060,
+        "wires": [
+            [
+                "3508cec39dcc3e3c"
+            ]
+        ]
+    },
+    {
+        "id": "813990864fe839a2",
+        "type": "telegram reply",
+        "z": "2f41d27cb1b73455",
+        "name": "get reply",
+        "bot": "8880288620190407",
+        "x": 1040,
+        "y": 3060,
+        "wires": [
+            [
+                "181196e363a3e9fe"
+            ]
+        ]
+    },
+    {
+        "id": "3508cec39dcc3e3c",
+        "type": "telegram sender",
+        "z": "2f41d27cb1b73455",
+        "name": "send question",
+        "bot": "8880288620190407",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 860,
+        "y": 3060,
+        "wires": [
+            [
+                "813990864fe839a2"
+            ]
+        ]
+    },
+    {
+        "id": "181196e363a3e9fe",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "mandarFecha",
+        "func": "global.set(\"fechaConsulta\", msg.payload.content);\n\nvar fecha = global.get('fechaConsulta');\n\n//hacer select donde devuelva el total de salidas\n//WHERE fecha = var fecha\n//deberia de devolver un numero\nmsg.payload=70;\nmsg.exito=1;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1220,
+        "y": 3060,
+        "wires": [
+            [
+                "03cecfd3c4bd0951"
+            ]
+        ]
+    },
+    {
+        "id": "03cecfd3c4bd0951",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "respuestaSalidas",
+        "func": "\n\nif (msg.exito == 1){\n    var content=\"El total de entradas el dia \"+global.get('fechaConsulta')+\" fue \"+msg.payload;\n}else{\n    var content = \"Error, vuelve a intentar\";\n}\n\nmsg.payload = {\n    \"chatId\": global.get('AcidKb'),\n    \"type\": \"message\",\n    \"content\": content\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1410,
+        "y": 3060,
+        "wires": [
+            [
+                "e23ef0fd84822a9f"
+            ]
+        ]
+    },
+    {
+        "id": "006adc679f3c16b5",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "qryOcupacion",
+        "func": "//contar el numero de entradas donde la salida sea = NULL\n//debe devolver un numero\n\nmsg.payload=4;\nmsg.exito=1;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 3120,
+        "wires": [
+            [
+                "4e22aa8fbe3520ee"
+            ]
+        ]
+    },
+    {
+        "id": "4e22aa8fbe3520ee",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "responderOcupacion",
+        "func": "if (msg.exito == 1) {\n    var content = \"La ocupacion actual en Artz es de \" + msg.payload;\n} else {\n    var content = \"Error, vuelve a intentar\";\n}\n\nmsg.payload = {\n    \"chatId\": global.get('AcidKb'),\n    \"type\": \"message\",\n    \"content\": content\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 980,
+        "y": 3120,
+        "wires": [
+            [
+                "e23ef0fd84822a9f"
+            ]
+        ]
+    },
+    {
+        "id": "e23ef0fd84822a9f",
+        "type": "telegram sender",
+        "z": "2f41d27cb1b73455",
+        "name": "MandaRespuestaAdmin",
+        "bot": "8880288620190407",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 1710,
+        "y": 3060,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c19f360b54246ec6",
+        "type": "telegram event",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "bot": "8880288620190407",
+        "event": "callback_query",
+        "autoanswer": true,
+        "x": 220,
+        "y": 3220,
+        "wires": [
+            [
+                "5e865609850f2c50"
+            ]
+        ]
+    },
+    {
+        "id": "5e865609850f2c50",
+        "type": "switch",
+        "z": "2f41d27cb1b73455",
+        "name": "check callback data",
+        "property": "payload.content",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "ganancias",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "a",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "b",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "placas",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 430,
+        "y": 3220,
+        "wires": [
+            [
+                "7897b11268acb1ca"
+            ],
+            [],
+            [],
+            [
+                "e9726d2532b48e9c"
+            ]
+        ]
+    },
+    {
+        "id": "3fc6e3225b29f847",
+        "type": "telegram sender",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "bot": "8880288620190407",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 850,
+        "y": 3200,
+        "wires": [
+            [
+                "badff2b434e2ebe3"
+            ]
+        ]
+    },
+    {
+        "id": "7897b11268acb1ca",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "ganancias",
+        "func": "var reply_markup = JSON.stringify({\n    \"inline_keyboard\": [[\n        {\n            \"text\": \"Ganancia a dia de hoy\",\n            \"callback_data\": \"hoy\"\n        },\n        {\n            \"text\": \"Sorpresa\",\n            \"callback_data\": \"sorpresa\"\n        }]\n    ]\n});\n\n\nvar options = {\n    chat_id: global.get('AcidKb'),\n    reply_markup: reply_markup,\n    message_id: global.get('AidKb')\n};\n\nmsg.payload.type = 'editMessageReplyMarkup';\nmsg.payload.content = reply_markup;\nmsg.payload.options = options;\n\nreturn [msg];\n/*\n// This is a sample of how to send a second inline keyboard with modified buttons\nvar reply_markup = JSON.stringify({\n    \"inline_keyboard\": [[\n        {\n            \"text\": \"On\",\n            \"callback_data\": \"Turn on\"\n        },\n        {\n            \"text\": \"Off\",\n            \"callback_data\": \"Turn off\"\n        }]\n    ]\n});\n\n\nvar options = {\n    chat_id: global.get(\"cidKb\"),\n    reply_markup: reply_markup,\n    messageId: global.get(\"idKb\")\n};\n\nmsg.payload.type = 'editMessageReplyMarkup';\nmsg.payload.content = reply_markup;\nmsg.payload.options = options;\n\nreturn [msg];\n/*\nvar opts = {\n    reply_to_message_id: msg.payload.messageId,\n    reply_markup: JSON.stringify({\n        \"inline_keyboard\": [\n            {\n                \"text\": \"Checar balance\",\n                \"callback_data\": \"checarS\"\n            },\n            {\n                \"text\": \"aumentar balance\",\n                \"callback_data\": \"recargaS\"\n            }],\n\n        \n    })\n};\n\n\n\nmsg.payload.content = \"Saldo: \";\nmsg.payload.options = opts;\n\n*/\n\n\nreturn [msg];",
+        "outputs": "1",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 3200,
+        "wires": [
+            [
+                "3fc6e3225b29f847"
+            ]
+        ]
+    },
+    {
+        "id": "badff2b434e2ebe3",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "getKeyboardIDs",
+        "func": "global.set('idKb', msg.payload.content.message_id);\nglobal.set('cidKb', msg.originalMessage.reply_to_message.chat.id)\nreturn [ msg ];",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1060,
+        "y": 3200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "42d79461d4f52cb6",
+        "type": "comment",
+        "z": "2f41d27cb1b73455",
+        "name": "Usar la funcion de placas nos preguntara una placa y nos dara su hora de entrada y salida",
+        "info": "",
+        "x": 890,
+        "y": 3300,
+        "wires": []
+    },
+    {
+        "id": "a5f8498cf9a9a2d4",
+        "type": "comment",
+        "z": "2f41d27cb1b73455",
+        "name": "Se reciclara la de usuario cuando funcione",
+        "info": "",
+        "x": 740,
+        "y": 3340,
+        "wires": []
+    },
+    {
+        "id": "365d0fe00a69eef7",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "entradasysalidas",
+        "func": "var reply_markup = JSON.stringify({\n    \"inline_keyboard\": [[\n        {\n            \"text\": \"Numero entradas\",\n            \"callback_data\": \"ee\"\n        },\n        {\n            \"text\": \"Numero salidas\",\n            \"callback_data\": \"ss\"\n        }],\n    [\n        {\n            \"text\": \"Ocupacion\",\n            \"callback_data\": \"ocupacion\"\n        }\n    ]\n    ]\n});\n\n\n\nvar options = {\n    chat_id: global.get('AcidKb'),\n    reply_markup: reply_markup,\n    message_id: global.get('AidKb')\n};\n\nmsg.payload.type = 'editMessageReplyMarkup';\nmsg.payload.content = reply_markup;\nmsg.payload.options = options;\n\nreturn [msg];\n",
+        "outputs": "1",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 2940,
+        "wires": [
+            [
+                "28063b2b24c30902"
+            ]
+        ]
+    },
+    {
+        "id": "28063b2b24c30902",
+        "type": "telegram sender",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "bot": "8880288620190407",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 890,
+        "y": 2940,
+        "wires": [
+            [
+                "75a971b505afcfd1"
+            ]
+        ]
+    },
+    {
+        "id": "75a971b505afcfd1",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "getKeyboardIDs",
+        "func": "global.set('AidKb', msg.payload.content.message_id);\nglobal.set('AcidKb', msg.originalMessage.reply_to_message.chat.id)\nreturn [ msg ];",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1080,
+        "y": 2940,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e9726d2532b48e9c",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "pedirPlaca",
+        "func": "\nmsg.payload = {\n    \"chatId\": global.get('cidKb'),\n    \"type\": \"message\",\n    \"content\": \"Introduce el usuario del cual obtendremos las placas: \"\n}\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 3260,
+        "wires": [
+            [
+                "72e08d3f75b955c6"
+            ]
+        ]
+    },
+    {
+        "id": "9bc4bc23e6dda90f",
+        "type": "telegram reply",
+        "z": "2f41d27cb1b73455",
+        "name": "get reply",
+        "bot": "8880288620190407",
+        "x": 1060,
+        "y": 3260,
+        "wires": [
+            [
+                "44c9d29b880afae8"
+            ]
+        ]
+    },
+    {
+        "id": "72e08d3f75b955c6",
+        "type": "telegram sender",
+        "z": "2f41d27cb1b73455",
+        "name": "send question",
+        "bot": "8880288620190407",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 880,
+        "y": 3260,
+        "wires": [
+            [
+                "9bc4bc23e6dda90f"
+            ]
+        ]
+    },
+    {
+        "id": "44c9d29b880afae8",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "qryPlaca",
+        "func": "\nmsg.topic = \"SELECT Placas FROM Placas WHERE User=' \" + msg.payload.content+\"';\";\nmsg.telegram = msg.payload;\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1260,
+        "y": 3260,
+        "wires": [
+            [
+                "9f0cbc131fcfde40"
+            ]
+        ]
+    },
+    {
+        "id": "a318de2958cde8a0",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "responderPlacas",
+        "func": "var content=\"\";\nif (msg.payload.length==0){\n    content = \"No tienes ninguna placa registrada en nuestro sistema\"\n}else if(msg.payload.length!=0){\n    content = \"Tus placas son: \\n\"\n    for (var i=0; i<msg.payload.length;i++){\n        content = content + msg.payload[i].Placas+\"\\n\";\n    }\n}\nmsg.payload = msg.telegram;\n\nmsg.payload = {\n    \"chatId\": global.get('cidKb'),\n    \"type\": \"message\",\n    \"content\": content\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1590,
+        "y": 3260,
+        "wires": [
+            [
+                "e23ef0fd84822a9f"
+            ]
+        ]
+    },
+    {
+        "id": "9f0cbc131fcfde40",
+        "type": "mysql",
+        "z": "2f41d27cb1b73455",
+        "mydb": "5f3a4f40281f4ab0",
+        "name": "asd1",
+        "x": 1410,
+        "y": 3260,
+        "wires": [
+            [
+                "a318de2958cde8a0"
+            ]
+        ]
+    },
+    {
+        "id": "919fbdd48cdce54d",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "qryPlaca",
+        "func": "var user = global.get(\"usrLogin\");\n\nmsg.topic = \"Select Placa from PagosPendientes INNER JOIN Placas on Placas=Placa AND User='\"+user+\"';\";\nmsg.telegram = msg.payload;\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 1700,
+        "wires": [
+            [
+                "e19c4345ecc8c82e"
+            ]
+        ]
+    },
+    {
+        "id": "669dddd217ca1399",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "responderPlacas",
+        "func": "var content=\"\";\nif (msg.payload.length==0){\n    content = \"No tienes ningun coche dentro del estacionamiento\"\n}else if(msg.payload.length!=0){\n    content = \"Tus placas dentro son: \\n\"\n    for (var i=0; i<msg.payload.length;i++){\n        content = content + msg.payload[i].Placa+\"\\n\";\n    }\n    content=content+\"Responde la que quieras consultar\";\n}\n\nmsg.payload = msg.telegram;\n\nmsg.payload = {\n    \"chatId\": global.get('cidKb'),\n    \"type\": \"message\",\n    \"content\": content\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 970,
+        "y": 1700,
+        "wires": [
+            [
+                "b9721ba6797af9f0"
+            ]
+        ]
+    },
+    {
+        "id": "e19c4345ecc8c82e",
+        "type": "mysql",
+        "z": "2f41d27cb1b73455",
+        "mydb": "5f3a4f40281f4ab0",
+        "name": "asd1",
+        "x": 790,
+        "y": 1700,
+        "wires": [
+            [
+                "669dddd217ca1399"
+            ]
+        ]
+    },
+    {
+        "id": "735818711673c1d8",
+        "type": "telegram reply",
+        "z": "2f41d27cb1b73455",
+        "name": "get reply",
+        "bot": "344d8bf1b12f79e1",
+        "x": 1340,
+        "y": 1700,
+        "wires": [
+            [
+                "2521ddde73b37e6c"
+            ]
+        ]
+    },
+    {
+        "id": "b9721ba6797af9f0",
+        "type": "telegram sender",
+        "z": "2f41d27cb1b73455",
+        "name": "send question",
+        "bot": "344d8bf1b12f79e1",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 1160,
+        "y": 1700,
+        "wires": [
+            [
+                "735818711673c1d8"
+            ]
+        ]
+    },
+    {
+        "id": "2521ddde73b37e6c",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "consulta Entrada Salida",
+        "func": "global.set(\"nuevaPlac\", msg.payload.content);\n\nvar usr = global.get('usrLogin');\nvar placa = global.get('nuevaPlac').toLowerCase();\nmsg.telegram = msg.payload;\n\nmsg.topic = \"Select hour(TIMEDIFF(now(), FechaEntrada)) as hour, MINUTE(TIMEDIFF(now(), FechaEntrada)) as mins from PagosPendientes where Placa = '\" + placa + \"';\";\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1550,
+        "y": 1700,
+        "wires": [
+            [
+                "de575cba6247df6b"
+            ]
+        ]
+    },
+    {
+        "id": "233c17f3dbb35c84",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "mandarMovimientos",
+        "func": "msg.mins = (msg.payload[0].hour * 60) + (msg.payload[0].mins);\nmsg.topic = \"Select Monto From Precios Where Tiempo>\" + msg.mins + \" LIMIT 1;\";\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1900,
+        "y": 1700,
+        "wires": [
+            [
+                "a3695e763efa28eb"
+            ]
+        ]
+    },
+    {
+        "id": "de575cba6247df6b",
+        "type": "mysql",
+        "z": "2f41d27cb1b73455",
+        "mydb": "5f3a4f40281f4ab0",
+        "name": "asd1",
+        "x": 1730,
+        "y": 1700,
+        "wires": [
+            [
+                "233c17f3dbb35c84"
+            ]
+        ]
+    },
+    {
+        "id": "2e0ad0d5fa19efb7",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "montoybalance",
+        "func": "msg.monto = msg.payload[0].Monto;\nglobal.set('monto', msg.monto);\n\nvar user = global.get(\"usrLogin\");\n\nmsg.topic = \"Select Saldo From Users where User='\" + user + \"';\";\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1900,
+        "y": 1760,
+        "wires": [
+            [
+                "1ae6c62a5746e574"
+            ]
+        ]
+    },
+    {
+        "id": "a3695e763efa28eb",
+        "type": "mysql",
+        "z": "2f41d27cb1b73455",
+        "mydb": "5f3a4f40281f4ab0",
+        "name": "asd1",
+        "x": 1750,
+        "y": 1760,
+        "wires": [
+            [
+                "2e0ad0d5fa19efb7"
+            ]
+        ]
+    },
+    {
+        "id": "048db6e2e284fbab",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "mandarBalance",
+        "func": "var saldo = msg.payload[0].Saldo\nmsg.payload = msg.telegram;\n\n\nmsg.payload = {\n    \"chatId\": global.get('cidKb'),\n    \"type\": \"message\",\n    \"content\": \"Tu pago estimado es: $\" + global.get(\"monto\") + \"\\nMonedero: $\" +saldo\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2040,
+        "y": 1840,
+        "wires": [
+            [
+                "dd5726627df66576"
+            ]
+        ]
+    },
+    {
+        "id": "1ae6c62a5746e574",
+        "type": "mysql",
+        "z": "2f41d27cb1b73455",
+        "mydb": "5f3a4f40281f4ab0",
+        "name": "asd1",
+        "x": 1890,
+        "y": 1840,
+        "wires": [
+            [
+                "048db6e2e284fbab"
+            ]
+        ]
+    },
+    {
+        "id": "63b3e4c758f1e51a",
+        "type": "mqtt in",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "topic": "slave/placaSalida",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "cd936c2a93c18300",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 3740,
+        "wires": [
+            [
+                "992cf0d576e8d376",
+                "b0a7d2e854bc118f"
+            ]
+        ]
+    },
+    {
+        "id": "992cf0d576e8d376",
+        "type": "debug",
+        "z": "2f41d27cb1b73455",
+        "name": "debug 53",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 140,
+        "y": 3680,
+        "wires": []
+    },
+    {
+        "id": "50bfcf5301db02cc",
+        "type": "comment",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "info": "Boton presion (entrada) y regresa 1 o 0",
+        "x": 1240,
+        "y": 3500,
+        "wires": []
+    },
+    {
+        "id": "36755b84503779dd",
+        "type": "rpi-srf",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "topic": "SRF",
+        "pulse": "5",
+        "pins": "33,35",
+        "precision": "0",
+        "x": 2410,
+        "y": 4320,
+        "wires": [
+            [
+                "807784210127067f"
+            ]
+        ]
+    },
+    {
+        "id": "4256b2929e3d59c9",
+        "type": "debug",
+        "z": "2f41d27cb1b73455",
+        "name": "debug 53",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2700,
+        "y": 4280,
+        "wires": []
+    },
+    {
+        "id": "807784210127067f",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "function 9",
+        "func": "//poner el numero desde el cual se detectara un coche\nvar servo=global.get(\"servo1\");\nvar nservo;\n\n\n if (msg.payload < 20&&servo == \"abre\"){\n     nservo = \"abre\";\n     msg.payload = nservo;\n      global.set(\"servo1\", nservo);\n     return msg;\n} else if (msg.payload > 20&&servo == \"abre\") {\n     nservo = \"cierra\";\n     msg.payload = nservo;\n      global.set(\"servo1\", nservo);\n     return msg;\n}\n  //  msg.payload = nservo;\n  //  return msg;\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2560,
+        "y": 4320,
+        "wires": [
+            [
+                "4256b2929e3d59c9",
+                "a0c54d9c5bd4ec19"
+            ]
+        ]
+    },
+    {
+        "id": "7c1d627c23926cbd",
+        "type": "debug",
+        "z": "2f41d27cb1b73455",
+        "name": "debug 54",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 120,
+        "y": 4080,
+        "wires": []
+    },
+    {
+        "id": "055ff5e75a2e5d4c",
+        "type": "mqtt out",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "topic": "esp2/o1",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "cd936c2a93c18300",
+        "x": 3620,
+        "y": 3640,
+        "wires": []
+    },
+    {
+        "id": "e6b34e1818a11f1b",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "led",
+        "func": "var l = global.get(\"led2\");\nvar temp;\n\nif (msg.payload==0){\n    l=1;\n    temp=\"on\"\n    msg.payload=temp;\n    global.set(\"led2\", l);\n}\nelse if(msg.payload==1){\n    l = 0;\n    temp = \"off\";\n    msg.payload=temp;\n    global.set(\"led2\", l);  \n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3230,
+        "y": 3680,
+        "wires": [
+            [
+                "05180b6a204357f1"
+            ]
+        ]
+    },
+    {
+        "id": "bf4a90297d588450",
+        "type": "debug",
+        "z": "2f41d27cb1b73455",
+        "name": "debug 55",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 3620,
+        "y": 3700,
+        "wires": []
+    },
+    {
+        "id": "95fc307b7e569af8",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "servo",
+        "func": "var s = global.get(\"servo2\");\nvar temp;\n\nif (msg.payload==1){\n    s=\"abre\";\n    global.set(\"servo2\", s);\n    msg.payload=s;\n}\nelse if(msg.payload==0){\n    s = \"cierra\";\n    global.set(\"servo2\", s);\n    msg.payload = s;\n}\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3230,
+        "y": 3720,
+        "wires": [
+            [
+                "19d8887170ed3c2d"
+            ]
+        ]
+    },
+    {
+        "id": "a7cb76f8493518e3",
+        "type": "mqtt out",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "topic": "esp2/o2",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "cd936c2a93c18300",
+        "x": 3600,
+        "y": 3780,
+        "wires": []
+    },
+    {
+        "id": "381a1759c29f05af",
+        "type": "debug",
+        "z": "2f41d27cb1b73455",
+        "name": "debug 56",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 3600,
+        "y": 3820,
+        "wires": []
+    },
+    {
+        "id": "d71dcb3567c98276",
+        "type": "inject",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 190,
+        "y": 3420,
+        "wires": [
+            [
+                "840e8014e70532fe"
+            ]
+        ]
+    },
+    {
+        "id": "840e8014e70532fe",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "function 12",
+        "func": "global.set(\"led2\", 0);\n\nglobal.set(\"servo2\", \"cierra\");",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 3420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b0a7d2e854bc118f",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "ChecarEntrada",
+        "func": "msg.placa=msg.payload;\nmsg.topic = \"Select hour(TIMEDIFF(now(), FechaEntrada)) as hour, MINUTE(TIMEDIFF(now(), FechaEntrada)) as mins from PagosPendientes where Placa = '\"+msg.placa+\"';\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 3740,
+        "wires": [
+            [
+                "7e0346877b736a7e",
+                "5e71f9626c769cc5"
+            ]
+        ]
+    },
+    {
+        "id": "7e0346877b736a7e",
+        "type": "mysql",
+        "z": "2f41d27cb1b73455",
+        "mydb": "5f3a4f40281f4ab0",
+        "name": "RevisarEntrada",
+        "x": 560,
+        "y": 3740,
+        "wires": [
+            [
+                "56fa43374cb960cd",
+                "dfeb672c07075eb7"
+            ]
+        ]
+    },
+    {
+        "id": "56fa43374cb960cd",
+        "type": "switch",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "empty"
+            },
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 730,
+        "y": 3740,
+        "wires": [
+            [
+                "4247670345b4b6a4"
+            ],
+            [
+                "0f85edb067683b75"
+            ]
+        ]
+    },
+    {
+        "id": "4247670345b4b6a4",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "ErrorUser",
+        "func": "msg.payload=0;\nmsg.topic = \"Este coche nunca entro.\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 3720,
+        "wires": [
+            [
+                "e6b34e1818a11f1b",
+                "95fc307b7e569af8",
+                "0bf01f673e423eb3"
+            ]
+        ]
+    },
+    {
+        "id": "0f85edb067683b75",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "EntradaExitosa",
+        "func": "msg.mins = (msg.payload[0].hour * 60) + (msg.payload[0].mins);\nmsg.topic = \"El coche con Placa \" + msg.Placa + \" lleva \" + msg.mins+\"min.\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 3780,
+        "wires": [
+            [
+                "268173ec5acedbd4"
+            ]
+        ]
+    },
+    {
+        "id": "268173ec5acedbd4",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "EntradaExitosa",
+        "func": "msg.topic = \"Select Monto From Precios Where Tiempo>\"+msg.mins+\";\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1080,
+        "y": 3780,
+        "wires": [
+            [
+                "7f3483c6b33ddbac"
+            ]
+        ]
+    },
+    {
+        "id": "7f3483c6b33ddbac",
+        "type": "mysql",
+        "z": "2f41d27cb1b73455",
+        "mydb": "5f3a4f40281f4ab0",
+        "name": "RevisarMonto",
+        "x": 1280,
+        "y": 3780,
+        "wires": [
+            [
+                "38743453fbe34762"
+            ]
+        ]
+    },
+    {
+        "id": "38743453fbe34762",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "PrintMonto",
+        "func": "msg.Monto = msg.payload[0].Monto;\nmsg.topic = \"Select Saldo as Saldo From Users where user in (select User from Placas where Placas = '\" + msg.placa +\"');\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1470,
+        "y": 3780,
+        "wires": [
+            [
+                "aef8a3fb1dbd2d8d"
+            ]
+        ]
+    },
+    {
+        "id": "aef8a3fb1dbd2d8d",
+        "type": "mysql",
+        "z": "2f41d27cb1b73455",
+        "mydb": "5f3a4f40281f4ab0",
+        "name": "RevisarMonto",
+        "x": 1660,
+        "y": 3780,
+        "wires": [
+            [
+                "14d9a1ddd41c0723",
+                "db0cf94c5a8d888c"
+            ]
+        ]
+    },
+    {
+        "id": "14d9a1ddd41c0723",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "PrintMonto",
+        "func": "var nuevoSaldo = msg.payload[0].Saldo-msg.Monto;\nmsg.Saldo = msg.payload[0].Saldo;\nif(nuevoSaldo<0)\n{\n    msg.payload=0\n}\nelse{\n    msg.payload=1\n    msg.topic =\"Update Users set Saldo='\"+nuevoSaldo+\"' WHERE User in (select User from Placas where Placas = '\"+msg.placa+\"');\";\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1830,
+        "y": 3780,
+        "wires": [
+            [
+                "6a1dda5e5e649fc0",
+                "668e26c4e427871c"
+            ]
+        ]
+    },
+    {
+        "id": "785e70dbecac74a2",
+        "type": "mysql",
+        "z": "2f41d27cb1b73455",
+        "mydb": "5f3a4f40281f4ab0",
+        "name": "UpdateSaldoSalida",
+        "x": 1950,
+        "y": 3900,
+        "wires": [
+            [
+                "0bb9701dfe24ade3"
+            ]
+        ]
+    },
+    {
+        "id": "462cdddabb5576ab",
+        "type": "catch",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "scope": [
+            "785e70dbecac74a2"
+        ],
+        "uncaught": false,
+        "x": 2030,
+        "y": 3740,
+        "wires": [
+            [
+                "60f5dc92b1a12fd9"
+            ]
+        ]
+    },
+    {
+        "id": "60f5dc92b1a12fd9",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "ErrorUser",
+        "func": "msg.payload=0;\nmsg.topic = \"Error al realizar el Pago Automatico.\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2180,
+        "y": 3740,
+        "wires": [
+            [
+                "ab65c124b6adcff2",
+                "e6b34e1818a11f1b",
+                "95fc307b7e569af8"
+            ]
+        ]
+    },
+    {
+        "id": "3d6312898f1af716",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "EntradaExitosa",
+        "func": "msg.topic = \"DELETE FROM PagosPendientes WHERE (Placa = '\"+msg.placa+\"');\";\nmsg.payload=1;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3060,
+        "y": 3900,
+        "wires": [
+            [
+                "d858f5ce80f251e9",
+                "95fc307b7e569af8",
+                "e6b34e1818a11f1b",
+                "ae661265bd777dae"
+            ]
+        ]
+    },
+    {
+        "id": "ab65c124b6adcff2",
+        "type": "debug",
+        "z": "2f41d27cb1b73455",
+        "name": "debug 67",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2140,
+        "y": 3660,
+        "wires": []
+    },
+    {
+        "id": "d858f5ce80f251e9",
+        "type": "debug",
+        "z": "2f41d27cb1b73455",
+        "name": "debug 68",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 3100,
+        "y": 3940,
+        "wires": []
+    },
+    {
+        "id": "f308b231d76d734c",
+        "type": "mysql",
+        "z": "2f41d27cb1b73455",
+        "mydb": "5f3a4f40281f4ab0",
+        "name": "RegistrarEntrada",
+        "x": 1390,
+        "y": 4120,
+        "wires": [
+            [
+                "3ac76d76c0a618a3"
+            ]
+        ]
+    },
+    {
+        "id": "ea70d2601a577956",
+        "type": "catch",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "scope": [
+            "f308b231d76d734c"
+        ],
+        "uncaught": false,
+        "x": 1450,
+        "y": 4080,
+        "wires": [
+            [
+                "f1d9205bbc526e26"
+            ]
+        ]
+    },
+    {
+        "id": "f1d9205bbc526e26",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "ErrorUser",
+        "func": "msg.payload=0;\nmsg.topic = \"Este coche ya esta dentro.\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1620,
+        "y": 4080,
+        "wires": [
+            [
+                "1ff532e7702ca568",
+                "eba41f3963e500db",
+                "80c274b77f54a8f9"
+            ]
+        ]
+    },
+    {
+        "id": "1ff532e7702ca568",
+        "type": "debug",
+        "z": "2f41d27cb1b73455",
+        "name": "debug 70",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1600,
+        "y": 4040,
+        "wires": []
+    },
+    {
+        "id": "3ac76d76c0a618a3",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "EntradaExitosa",
+        "func": "msg.topic = \"El coche con Placa \"+msg.placa+\" a ingresado.\";\nmsg.payload=1;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1600,
+        "y": 4120,
+        "wires": [
+            [
+                "eba41f3963e500db",
+                "80c274b77f54a8f9",
+                "6ab356f8a8bf0b80"
+            ]
+        ]
+    },
+    {
+        "id": "16729f15e4c095ea",
+        "type": "google-cloud-vision",
+        "z": "2f41d27cb1b73455",
+        "account": "",
+        "keyFilename": "",
+        "faceDetection": false,
+        "landmarkDetection": false,
+        "logoDetection": false,
+        "labelDetection": false,
+        "textDetection": true,
+        "documentTextDetection": false,
+        "safeSearchDetection": false,
+        "imageProperties": false,
+        "cropHints": false,
+        "webDetection": false,
+        "productSearch": false,
+        "objectLocalization": false,
+        "name": "",
+        "x": 870,
+        "y": 4120,
+        "wires": [
+            [
+                "9a11c6d91ba9ff47",
+                "02752d336e0bfa1a"
+            ]
+        ]
+    },
+    {
+        "id": "bc9624b9c96d7be4",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "function 13",
+        "func": "//var lei = msg.payload.textAnnotations[0].description;\n//var i = 0;\nvar j;\nvar placa;\nvar indice;\nvar validacion;\n/*\nmsg.prueba = msg.payload.textAnnotations[0].description.split(/\\n/);\nfor (let el of msg.prueba) {\n    const pattern = /[\\w+]+[-][\\w+]+[-]?[[\\w+]+]?/;\n    validacion = pattern.exec(el);\n    node.warn(validacion);\n    if (validacion != null) {\n        placa = validacion;\n    }\n}\n\nmsg.placa = placa[0].toLowerCase();\n*/\nmsg.placa=msg.payload;\nmsg.topic = \"INSERT INTO PagosPendientes(Placa) VALUES('\" + msg.placa + \"');\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1170,
+        "y": 4120,
+        "wires": [
+            [
+                "f308b231d76d734c",
+                "5a075b3d53fd78b7"
+            ]
+        ]
+    },
+    {
+        "id": "fdc4c6d1383544f9",
+        "type": "mqtt in",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "topic": "esp32/boton",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "cd936c2a93c18300",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 110,
+        "y": 4120,
+        "wires": [
+            [
+                "7c1d627c23926cbd",
+                "a48de615117feed0"
+            ]
+        ]
+    },
+    {
+        "id": "6a1dda5e5e649fc0",
+        "type": "debug",
+        "z": "2f41d27cb1b73455",
+        "name": "debug 81",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1820,
+        "y": 3680,
+        "wires": []
+    },
+    {
+        "id": "db0cf94c5a8d888c",
+        "type": "debug",
+        "z": "2f41d27cb1b73455",
+        "name": "debug 82",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1620,
+        "y": 3680,
+        "wires": []
+    },
+    {
+        "id": "668e26c4e427871c",
+        "type": "switch",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1950,
+        "y": 3840,
+        "wires": [
+            [
+                "785e70dbecac74a2"
+            ],
+            [
+                "60f5dc92b1a12fd9"
+            ]
+        ]
+    },
+    {
+        "id": "ae661265bd777dae",
+        "type": "mysql",
+        "z": "2f41d27cb1b73455",
+        "mydb": "5f3a4f40281f4ab0",
+        "name": "DeletePagosPendientes",
+        "x": 3310,
+        "y": 3920,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0bb9701dfe24ade3",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "EntradaExitosa",
+        "func": "msg.topic = \"Select user from Placas as User where Placas='\"+msg.placa+\"';\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2140,
+        "y": 3900,
+        "wires": [
+            [
+                "6dbcd79668fe704c",
+                "42951fb9d0e722e2"
+            ]
+        ]
+    },
+    {
+        "id": "6dbcd79668fe704c",
+        "type": "mysql",
+        "z": "2f41d27cb1b73455",
+        "mydb": "5f3a4f40281f4ab0",
+        "name": "UpdateSaldoSalida",
+        "x": 2330,
+        "y": 3900,
+        "wires": [
+            [
+                "f334db325ec46c66"
+            ]
+        ]
+    },
+    {
+        "id": "a4b6cb13804974dc",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "EntradaExitosa",
+        "func": "msg.Fecha = msg.payload[0].FechaEntrada;\nmsg.topic = \"insert into HistorialPagos(User, Placa, Monto, FechaEntrada) Values('\"+msg.user+\"','\"+msg.placa+\"','\"+msg.Monto+\"','\"+msg.Fecha+\"');\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2680,
+        "y": 3900,
+        "wires": [
+            [
+                "7583b2086cb1467d",
+                "4bf252450eae6982"
+            ]
+        ]
+    },
+    {
+        "id": "7583b2086cb1467d",
+        "type": "mysql",
+        "z": "2f41d27cb1b73455",
+        "mydb": "5f3a4f40281f4ab0",
+        "name": "UpdateSaldoSalida",
+        "x": 2870,
+        "y": 3900,
+        "wires": [
+            [
+                "3d6312898f1af716"
+            ]
+        ]
+    },
+    {
+        "id": "eba41f3963e500db",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "function 14",
+        "func": "var s = global.get(\"servo1\");\nvar temp;\n\nif (msg.payload==1){\n    s=\"abre\";\n    global.set(\"servo1\", s);\n    msg.payload=s;\n}\nelse if(msg.payload==0){\n    s = \"cierra\";\n    global.set(\"servo1\", s);\n    msg.payload = s;\n}\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1930,
+        "y": 4200,
+        "wires": [
+            [
+                "478671a241da50e4"
+            ]
+        ]
+    },
+    {
+        "id": "8b8112459a42a51d",
+        "type": "inject",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 1670,
+        "y": 4220,
+        "wires": [
+            [
+                "eba41f3963e500db",
+                "80c274b77f54a8f9"
+            ]
+        ]
+    },
+    {
+        "id": "a4257aaf786957c2",
+        "type": "inject",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 1670,
+        "y": 4260,
+        "wires": [
+            [
+                "eba41f3963e500db",
+                "80c274b77f54a8f9"
+            ]
+        ]
+    },
+    {
+        "id": "2fb8122067d2612c",
+        "type": "mqtt out",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "topic": "esp32/output2",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "cd936c2a93c18300",
+        "x": 2260,
+        "y": 4220,
+        "wires": []
+    },
+    {
+        "id": "80c274b77f54a8f9",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "function 15",
+        "func": "var l = global.get(\"led\");\nvar temp;\n\nif (msg.payload==0){\n    l=1;\n    temp=\"on\"\n    msg.payload=temp;\n    global.set(\"led\", l);\n}\nelse if(msg.payload==1){\n    l = 0;\n    temp = \"off\";\n    msg.payload=temp;\n    global.set(\"led\", l);  \n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1930,
+        "y": 4160,
+        "wires": [
+            [
+                "dee7da72eb120027"
+            ]
+        ]
+    },
+    {
+        "id": "1218e557f66f0cc3",
+        "type": "mqtt out",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "topic": "esp32/output1",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "cd936c2a93c18300",
+        "x": 2260,
+        "y": 4160,
+        "wires": []
+    },
+    {
+        "id": "233ce75f67b4fc18",
+        "type": "inject",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 2970,
+        "y": 3480,
+        "wires": [
+            [
+                "e6b34e1818a11f1b",
+                "95fc307b7e569af8"
+            ]
+        ]
+    },
+    {
+        "id": "66d9123ca3c2f78b",
+        "type": "inject",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 2970,
+        "y": 3540,
+        "wires": [
+            [
+                "e6b34e1818a11f1b",
+                "95fc307b7e569af8"
+            ]
+        ]
+    },
+    {
+        "id": "478671a241da50e4",
+        "type": "counter-loop",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "counter": "il33f31bdccd0a18b8",
+        "counterType": "msg",
+        "reset": false,
+        "resetValue": "value-null",
+        "initial": 0,
+        "initialType": "num",
+        "operator": "lt",
+        "termination": "3",
+        "terminationType": "num",
+        "increment": 1,
+        "incrementType": "num",
+        "x": 1900,
+        "y": 4280,
+        "wires": [
+            [
+                "2fb8122067d2612c",
+                "fd23c46daa6b26ad"
+            ],
+            [
+                "e56228c0dbf2a03e",
+                "fd23c46daa6b26ad",
+                "2fb8122067d2612c"
+            ]
+        ]
+    },
+    {
+        "id": "e56228c0dbf2a03e",
+        "type": "delay",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "500",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1910,
+        "y": 4380,
+        "wires": [
+            [
+                "eba41f3963e500db"
+            ]
+        ]
+    },
+    {
+        "id": "19d8887170ed3c2d",
+        "type": "counter-loop",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "counter": "il33f31bdccd0a18b8",
+        "counterType": "msg",
+        "reset": false,
+        "resetValue": "value-null",
+        "initial": 0,
+        "initialType": "num",
+        "operator": "lt",
+        "termination": "15",
+        "terminationType": "num",
+        "increment": 1,
+        "incrementType": "num",
+        "x": 3230,
+        "y": 3780,
+        "wires": [
+            [
+                "a7cb76f8493518e3",
+                "381a1759c29f05af"
+            ],
+            [
+                "b36242e147bcacf2",
+                "381a1759c29f05af",
+                "a7cb76f8493518e3"
+            ]
+        ]
+    },
+    {
+        "id": "b36242e147bcacf2",
+        "type": "delay",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "500",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 3290,
+        "y": 3840,
+        "wires": [
+            [
+                "95fc307b7e569af8"
+            ]
+        ]
+    },
+    {
+        "id": "dee7da72eb120027",
+        "type": "counter-loop",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "counter": "il33f31bdccd0a18b8",
+        "counterType": "msg",
+        "reset": false,
+        "resetValue": "value-null",
+        "initial": 0,
+        "initialType": "num",
+        "operator": "lt",
+        "termination": "3",
+        "terminationType": "num",
+        "increment": 1,
+        "incrementType": "num",
+        "x": 1980,
+        "y": 4100,
+        "wires": [
+            [
+                "1218e557f66f0cc3",
+                "82fa6008560043f6"
+            ],
+            [
+                "dca754106a0a1daf",
+                "82fa6008560043f6",
+                "1218e557f66f0cc3"
+            ]
+        ]
+    },
+    {
+        "id": "dca754106a0a1daf",
+        "type": "delay",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "500",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1990,
+        "y": 4060,
+        "wires": [
+            [
+                "80c274b77f54a8f9"
+            ]
+        ]
+    },
+    {
+        "id": "f334db325ec46c66",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "EntradaExitosa",
+        "func": "msg.user = msg.payload[0].user;\nmsg.topic = \"Select FechaEntrada from PagosPendientes where Placa='\"+msg.placa+\"';\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2420,
+        "y": 3840,
+        "wires": [
+            [
+                "d5745f391c8d26e4",
+                "bd457ada097402a9"
+            ]
+        ]
+    },
+    {
+        "id": "d5745f391c8d26e4",
+        "type": "mysql",
+        "z": "2f41d27cb1b73455",
+        "mydb": "5f3a4f40281f4ab0",
+        "name": "UpdateSaldoSalida",
+        "x": 2610,
+        "y": 3840,
+        "wires": [
+            [
+                "a4b6cb13804974dc"
+            ]
+        ]
+    },
+    {
+        "id": "05180b6a204357f1",
+        "type": "counter-loop",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "counter": "il33f31bdccd0a18b8",
+        "counterType": "msg",
+        "reset": false,
+        "resetValue": "value-null",
+        "initial": 0,
+        "initialType": "num",
+        "operator": "lt",
+        "termination": "15",
+        "terminationType": "num",
+        "increment": 1,
+        "incrementType": "num",
+        "x": 3310,
+        "y": 3620,
+        "wires": [
+            [
+                "055ff5e75a2e5d4c",
+                "bf4a90297d588450"
+            ],
+            [
+                "7adea6eb21dd705e",
+                "055ff5e75a2e5d4c",
+                "bf4a90297d588450"
+            ]
+        ]
+    },
+    {
+        "id": "7adea6eb21dd705e",
+        "type": "delay",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "500",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 3270,
+        "y": 3560,
+        "wires": [
+            [
+                "e6b34e1818a11f1b"
+            ]
+        ]
+    },
+    {
+        "id": "9929f8a0b3a7fcc0",
+        "type": "inject",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "xag-576-a",
+        "payloadType": "str",
+        "x": 320,
+        "y": 3600,
+        "wires": [
+            [
+                "b0a7d2e854bc118f"
+            ]
+        ]
+    },
+    {
+        "id": "42951fb9d0e722e2",
+        "type": "debug",
+        "z": "2f41d27cb1b73455",
+        "name": "debug 87",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2220,
+        "y": 3820,
+        "wires": []
+    },
+    {
+        "id": "4bf252450eae6982",
+        "type": "debug",
+        "z": "2f41d27cb1b73455",
+        "name": "debug 88",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2820,
+        "y": 3820,
+        "wires": []
+    },
+    {
+        "id": "bd457ada097402a9",
+        "type": "debug",
+        "z": "2f41d27cb1b73455",
+        "name": "debug 89",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2560,
+        "y": 3800,
+        "wires": []
+    },
+    {
+        "id": "6ab356f8a8bf0b80",
+        "type": "debug",
+        "z": "2f41d27cb1b73455",
+        "name": "debug 90",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1600,
+        "y": 4160,
+        "wires": []
+    },
+    {
+        "id": "fd23c46daa6b26ad",
+        "type": "debug",
+        "z": "2f41d27cb1b73455",
+        "name": "debug 91",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2240,
+        "y": 4320,
+        "wires": []
+    },
+    {
+        "id": "82fa6008560043f6",
+        "type": "debug",
+        "z": "2f41d27cb1b73455",
+        "name": "debug 92",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2240,
+        "y": 4080,
+        "wires": []
+    },
+    {
+        "id": "08ce9b5c768f0625",
+        "type": "inject",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 810,
+        "y": 4180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a0c54d9c5bd4ec19",
+        "type": "switch",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "cierra",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 2710,
+        "y": 4340,
+        "wires": [
+            [
+                "1508eabb7fc8f97c"
+            ]
+        ]
+    },
+    {
+        "id": "1508eabb7fc8f97c",
+        "type": "change",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2860,
+        "y": 4340,
+        "wires": [
+            [
+                "eba41f3963e500db",
+                "80c274b77f54a8f9"
+            ]
+        ]
+    },
+    {
+        "id": "e0b610910cd38ee0",
+        "type": "debug",
+        "z": "2f41d27cb1b73455",
+        "name": "debug 93",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2660,
+        "y": 3580,
+        "wires": []
+    },
+    {
+        "id": "05e50794f4df3d60",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "function 16",
+        "func": "//poner el numero desde el cual se detectara un coche\nvar servo=global.get(\"servo2\");\nvar nservo2;\n\n\n if (msg.payload < 20&&servo == \"abre\"){\n     nservo2 = \"abre\";\n     msg.payload = nservo2;\n      global.set(\"servo2\", nservo2);\n     return msg;\n} else if (msg.payload > 20&&servo == \"abre\") {\n     nservo2 = \"cierra\";\n     msg.payload = nservo2;\n      global.set(\"servo2\", nservo2);\n     return msg;\n}\n  //  msg.payload = nservo;\n  //  return msg;\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2520,
+        "y": 3620,
+        "wires": [
+            [
+                "e0b610910cd38ee0",
+                "d2af7d0d7e6fd737"
+            ]
+        ]
+    },
+    {
+        "id": "d2af7d0d7e6fd737",
+        "type": "switch",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "cierra",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 2670,
+        "y": 3640,
+        "wires": [
+            [
+                "cf8d76fb9f18ce48"
+            ]
+        ]
+    },
+    {
+        "id": "cf8d76fb9f18ce48",
+        "type": "change",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2820,
+        "y": 3640,
+        "wires": [
+            [
+                "e6b34e1818a11f1b",
+                "95fc307b7e569af8"
+            ]
+        ]
+    },
+    {
+        "id": "02c793051f92d87e",
+        "type": "mqtt in",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "topic": "slave/us",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "68ebc2715dc8b0df",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 2340,
+        "y": 3620,
+        "wires": [
+            [
+                "05e50794f4df3d60"
+            ]
+        ]
+    },
+    {
+        "id": "0bf01f673e423eb3",
+        "type": "debug",
+        "z": "2f41d27cb1b73455",
+        "name": "debug 94",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1040,
+        "y": 3660,
+        "wires": []
+    },
+    {
+        "id": "dfeb672c07075eb7",
+        "type": "debug",
+        "z": "2f41d27cb1b73455",
+        "name": "debug 95",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 3680,
+        "wires": []
+    },
+    {
+        "id": "5e71f9626c769cc5",
+        "type": "debug",
+        "z": "2f41d27cb1b73455",
+        "name": "debug 96",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 520,
+        "y": 3660,
+        "wires": []
+    },
+    {
+        "id": "9749f247763852d2",
+        "type": "inject",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "str",
+        "x": 130,
+        "y": 4200,
+        "wires": [
+            [
+                "a48de615117feed0"
+            ]
+        ]
+    },
+    {
+        "id": "a48de615117feed0",
+        "type": "camerapi-takephoto",
+        "z": "2f41d27cb1b73455",
+        "filemode": "1",
+        "filename": "",
+        "filedefpath": "0",
+        "filepath": "/home/pi/Pictures/Proyecto",
+        "fileformat": "jpeg",
+        "resolution": "8",
+        "rotation": "0",
+        "fliph": "0",
+        "flipv": "0",
+        "brightness": "50",
+        "contrast": "0",
+        "sharpness": "0",
+        "quality": "80",
+        "imageeffect": "none",
+        "exposuremode": "auto",
+        "iso": "0",
+        "agcwait": "1.0",
+        "led": "1",
+        "awb": "auto",
+        "name": "pic",
+        "x": 270,
+        "y": 4120,
+        "wires": [
+            [
+                "f525d1de02de332e",
+                "32e2bc18bab128f3"
+            ]
+        ]
+    },
+    {
+        "id": "f525d1de02de332e",
+        "type": "function",
+        "z": "2f41d27cb1b73455",
+        "name": "obtenerNombrePic",
+        "func": "var fn = msg.filename;\nglobal.set('fileName', fn);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 4160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "753b18e2e08bb7f1",
+        "type": "change",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "filename",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 660,
+        "y": 4120,
+        "wires": [
+            [
+                "16729f15e4c095ea"
+            ]
+        ]
+    },
+    {
+        "id": "32e2bc18bab128f3",
+        "type": "file in",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "filename": "payload",
+        "filenameType": "msg",
+        "format": "",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 440,
+        "y": 4120,
+        "wires": [
+            [
+                "4021b62f1d7936c2",
+                "753b18e2e08bb7f1"
+            ]
+        ]
+    },
+    {
+        "id": "4021b62f1d7936c2",
+        "type": "image",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "width": 160,
+        "data": "payload",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 640,
+        "y": 3960,
+        "wires": []
+    },
+    {
+        "id": "5a075b3d53fd78b7",
+        "type": "debug",
+        "z": "2f41d27cb1b73455",
+        "name": "debug 97",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1220,
+        "y": 4060,
+        "wires": []
+    },
+    {
+        "id": "9a11c6d91ba9ff47",
+        "type": "switch",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "property": "payload.textAnnotations",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "empty"
+            },
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 990,
+        "y": 4120,
+        "wires": [
+            [
+                "f1d9205bbc526e26"
+            ],
+            [
+                "bc9624b9c96d7be4"
+            ]
+        ]
+    },
+    {
+        "id": "02752d336e0bfa1a",
+        "type": "debug",
+        "z": "2f41d27cb1b73455",
+        "name": "debug 98",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 980,
+        "y": 4060,
+        "wires": []
+    },
+    {
+        "id": "345b283ac17d757e",
+        "type": "mqtt in",
+        "z": "2f41d27cb1b73455",
+        "name": "",
+        "topic": "slave/placaEntrada",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "68ebc2715dc8b0df",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1050,
+        "y": 4160,
+        "wires": [
+            [
+                "bc9624b9c96d7be4"
+            ]
+        ]
+    },
+    {
+        "id": "344d8bf1b12f79e1",
+        "type": "telegram bot",
+        "botname": "EstacionaBot",
+        "usernames": "",
+        "chatids": "",
+        "baseapiurl": "",
+        "updatemode": "polling",
+        "pollinterval": "300",
+        "usesocks": false,
+        "sockshost": "",
+        "socksprotocol": "socks5",
+        "socksport": "6667",
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "botpath": "",
+        "localbotport": "8443",
+        "publicbotport": "8443",
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "sslterminated": false,
+        "verboselogging": false
+    },
+    {
+        "id": "5f3a4f40281f4ab0",
+        "type": "MySQLdatabase",
+        "name": "",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "proyecto",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "cd936c2a93c18300",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "8880288620190407",
+        "type": "telegram bot",
+        "botname": "aaaaaaaaaa",
+        "usernames": "",
+        "chatids": "",
+        "baseapiurl": "",
+        "updatemode": "polling",
+        "pollinterval": "300",
+        "usesocks": false,
+        "sockshost": "",
+        "socksprotocol": "socks5",
+        "socksport": "6667",
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "botpath": "",
+        "localbotport": "8443",
+        "publicbotport": "8443",
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "sslterminated": false,
+        "verboselogging": false
+    },
+    {
+        "id": "68ebc2715dc8b0df",
+        "type": "mqtt-broker",
+        "name": "ilde",
+        "broker": "192.168.200.129",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]

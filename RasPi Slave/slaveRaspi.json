@@ -1,0 +1,591 @@
+[
+    {
+        "id": "4cab34945ed08387",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "98dfe03ff626d58a",
+        "type": "camerapi-takephoto",
+        "z": "4cab34945ed08387",
+        "filemode": "1",
+        "filename": "",
+        "filedefpath": "0",
+        "filepath": "/home/rmn/Pictures/Proyecto",
+        "fileformat": "jpeg",
+        "resolution": "8",
+        "rotation": "0",
+        "fliph": "0",
+        "flipv": "0",
+        "brightness": "50",
+        "contrast": "0",
+        "sharpness": "0",
+        "quality": "80",
+        "imageeffect": "none",
+        "exposuremode": "auto",
+        "iso": "0",
+        "agcwait": "1.0",
+        "led": "1",
+        "awb": "auto",
+        "name": "pic",
+        "x": 250,
+        "y": 240,
+        "wires": [
+            [
+                "c94d4fc927df933a",
+                "84da8a50a8692e1b"
+            ]
+        ]
+    },
+    {
+        "id": "c94d4fc927df933a",
+        "type": "function",
+        "z": "4cab34945ed08387",
+        "name": "obtenerNombrePic",
+        "func": "var fn = msg.filename;\nglobal.set('fileName', fn);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "439b0b73d951ad14",
+        "type": "google-cloud-vision",
+        "z": "4cab34945ed08387",
+        "account": "",
+        "keyFilename": "",
+        "faceDetection": false,
+        "landmarkDetection": false,
+        "logoDetection": false,
+        "labelDetection": false,
+        "textDetection": true,
+        "documentTextDetection": false,
+        "safeSearchDetection": false,
+        "imageProperties": false,
+        "cropHints": false,
+        "webDetection": false,
+        "productSearch": false,
+        "objectLocalization": false,
+        "name": "",
+        "x": 830,
+        "y": 240,
+        "wires": [
+            [
+                "27f197eb28642c5b"
+            ]
+        ]
+    },
+    {
+        "id": "16ef044211bbc4f9",
+        "type": "change",
+        "z": "4cab34945ed08387",
+        "name": "",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "filename",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 640,
+        "y": 240,
+        "wires": [
+            [
+                "439b0b73d951ad14"
+            ]
+        ]
+    },
+    {
+        "id": "84da8a50a8692e1b",
+        "type": "file in",
+        "z": "4cab34945ed08387",
+        "name": "",
+        "filename": "payload",
+        "filenameType": "msg",
+        "format": "",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 420,
+        "y": 240,
+        "wires": [
+            [
+                "3abf598926aa3821",
+                "16ef044211bbc4f9"
+            ]
+        ]
+    },
+    {
+        "id": "fd5523fb077a5313",
+        "type": "inject",
+        "z": "4cab34945ed08387",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 140,
+        "wires": [
+            [
+                "98dfe03ff626d58a"
+            ]
+        ]
+    },
+    {
+        "id": "27f197eb28642c5b",
+        "type": "function",
+        "z": "4cab34945ed08387",
+        "name": "function 8",
+        "func": "//var lei = msg.payload.textAnnotations[0].description;\n//var i = 0;\nvar j;\nvar placa;\nvar indice;\nvar validacion;\n\nmsg.prueba = msg.payload.textAnnotations[0].description.split(/\\n/);\nfor (let el of msg.prueba) {\n    const pattern = /[\\w+]+[-][\\w+]+[-]?[[\\w+]+]?/;\n    validacion = pattern.exec(el);\n    node.warn(validacion);\n    if (validacion != null) {\n        placa = validacion;\n    }\n}\n\nmsg.payload=msg.placa = placa[0].toLowerCase();\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 980,
+        "y": 240,
+        "wires": [
+            [
+                "729071189a4c3e12"
+            ]
+        ]
+    },
+    {
+        "id": "3abf598926aa3821",
+        "type": "image",
+        "z": "4cab34945ed08387",
+        "name": "",
+        "width": 160,
+        "data": "payload",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 620,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "729071189a4c3e12",
+        "type": "mqtt out",
+        "z": "4cab34945ed08387",
+        "name": "",
+        "topic": "slave/placaSalida",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fddf689821b03842",
+        "x": 1190,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "74c9d276bbe231c4",
+        "type": "mqtt in",
+        "z": "4cab34945ed08387",
+        "name": "",
+        "topic": "esp2/boton",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fddf689821b03842",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 80,
+        "y": 320,
+        "wires": [
+            [
+                "f5bd1b2518279598"
+            ]
+        ]
+    },
+    {
+        "id": "f5bd1b2518279598",
+        "type": "switch",
+        "z": "4cab34945ed08387",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 110,
+        "y": 240,
+        "wires": [
+            [
+                "98dfe03ff626d58a"
+            ]
+        ]
+    },
+    {
+        "id": "e3b48c9ffc4487ed",
+        "type": "rpi-srf",
+        "z": "4cab34945ed08387",
+        "name": "",
+        "topic": "SRF",
+        "pulse": "5",
+        "pins": "33,35",
+        "precision": "0",
+        "x": 90,
+        "y": 540,
+        "wires": [
+            [
+                "40733b243bc21338",
+                "5a0902eac21941bc"
+            ]
+        ]
+    },
+    {
+        "id": "5a0902eac21941bc",
+        "type": "debug",
+        "z": "4cab34945ed08387",
+        "name": "debug 53",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 480,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "40733b243bc21338",
+        "type": "mqtt out",
+        "z": "4cab34945ed08387",
+        "name": "",
+        "topic": "slave/us",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fddf689821b03842",
+        "x": 480,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "81d51acc4e0f90f4",
+        "type": "mqtt in",
+        "z": "4cab34945ed08387",
+        "name": "",
+        "topic": "esp32/boton",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fddf689821b03842",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 750,
+        "y": 420,
+        "wires": [
+            [
+                "66661f4f10aa4d34"
+            ]
+        ]
+    },
+    {
+        "id": "8c95620e5657f896",
+        "type": "camerapi-takephoto",
+        "z": "4cab34945ed08387",
+        "filemode": "1",
+        "filename": "",
+        "filedefpath": "0",
+        "filepath": "/home/rmn/Pictures/Proyecto",
+        "fileformat": "jpeg",
+        "resolution": "8",
+        "rotation": "0",
+        "fliph": "0",
+        "flipv": "0",
+        "brightness": "50",
+        "contrast": "0",
+        "sharpness": "0",
+        "quality": "80",
+        "imageeffect": "none",
+        "exposuremode": "auto",
+        "iso": "0",
+        "agcwait": "1.0",
+        "led": "1",
+        "awb": "auto",
+        "name": "pic",
+        "x": 1110,
+        "y": 420,
+        "wires": [
+            [
+                "29badc2024884655",
+                "23a2e00673cf0294"
+            ]
+        ]
+    },
+    {
+        "id": "29badc2024884655",
+        "type": "function",
+        "z": "4cab34945ed08387",
+        "name": "obtenerNombrePic",
+        "func": "var fn = msg.filename;\nglobal.set('fileName', fn);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1310,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "06877dcaae992b1a",
+        "type": "google-cloud-vision",
+        "z": "4cab34945ed08387",
+        "account": "",
+        "keyFilename": "",
+        "faceDetection": false,
+        "landmarkDetection": false,
+        "logoDetection": false,
+        "labelDetection": false,
+        "textDetection": true,
+        "documentTextDetection": false,
+        "safeSearchDetection": false,
+        "imageProperties": false,
+        "cropHints": false,
+        "webDetection": false,
+        "productSearch": false,
+        "objectLocalization": false,
+        "name": "",
+        "x": 1690,
+        "y": 420,
+        "wires": [
+            [
+                "b46f42de0f422814"
+            ]
+        ]
+    },
+    {
+        "id": "70ed8afd01b3c78b",
+        "type": "change",
+        "z": "4cab34945ed08387",
+        "name": "",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "filename",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1500,
+        "y": 420,
+        "wires": [
+            [
+                "06877dcaae992b1a"
+            ]
+        ]
+    },
+    {
+        "id": "23a2e00673cf0294",
+        "type": "file in",
+        "z": "4cab34945ed08387",
+        "name": "",
+        "filename": "payload",
+        "filenameType": "msg",
+        "format": "",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 1280,
+        "y": 420,
+        "wires": [
+            [
+                "fd83dac41e77d7d4",
+                "70ed8afd01b3c78b"
+            ]
+        ]
+    },
+    {
+        "id": "0b30f4ead94c9d50",
+        "type": "inject",
+        "z": "4cab34945ed08387",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 980,
+        "y": 320,
+        "wires": [
+            [
+                "8c95620e5657f896"
+            ]
+        ]
+    },
+    {
+        "id": "b46f42de0f422814",
+        "type": "function",
+        "z": "4cab34945ed08387",
+        "name": "function 9",
+        "func": "//var lei = msg.payload.textAnnotations[0].description;\n//var i = 0;\nvar j;\nvar placa;\nvar indice;\nvar validacion;\n\nmsg.prueba = msg.payload.textAnnotations[0].description.split(/\\n/);\nfor (let el of msg.prueba) {\n    const pattern = /[\\w+]+[-][\\w+]+[-]?[[\\w+]+]?/;\n    validacion = pattern.exec(el);\n    node.warn(validacion);\n    if (validacion != null) {\n        placa = validacion;\n    }\n}\n\nmsg.payload=msg.placa = placa[0].toLowerCase();\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1840,
+        "y": 420,
+        "wires": [
+            [
+                "c7f4c335b9bf8691"
+            ]
+        ]
+    },
+    {
+        "id": "fd83dac41e77d7d4",
+        "type": "image",
+        "z": "4cab34945ed08387",
+        "name": "",
+        "width": 160,
+        "data": "payload",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1480,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "66661f4f10aa4d34",
+        "type": "switch",
+        "z": "4cab34945ed08387",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 970,
+        "y": 420,
+        "wires": [
+            [
+                "8c95620e5657f896"
+            ]
+        ]
+    },
+    {
+        "id": "c7f4c335b9bf8691",
+        "type": "mqtt out",
+        "z": "4cab34945ed08387",
+        "name": "",
+        "topic": "slave/placaEntrada",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fddf689821b03842",
+        "x": 2050,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "fddf689821b03842",
+        "type": "mqtt-broker",
+        "name": "ilde",
+        "broker": "192.168.200.129",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
